@@ -1,0 +1,1 @@
+CREATE DATABASE traveljournal_db;
