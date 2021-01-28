@@ -3,6 +3,16 @@ var bcrypt = require("bcryptjs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+     
+    },
     // The email cannot be null, and must be a proper email before creation
     email: {
       type: DataTypes.STRING,
@@ -16,7 +26,13 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    profileImage: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
+ 
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
@@ -27,5 +43,15 @@ module.exports = function(sequelize, DataTypes) {
   User.addHook("beforeCreate", function(user) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
+
+  //Creating one to many relationship with the journal table. Basically one user can have more than one journals
+
+  User.associate = function(models) {
+    // Associating User with journal
+    // When an User is deleted, also delete any associated journal
+    User.hasMany(models.journal, {
+      onDelete: "cascade"
+    });
+  };
   return User;
 };
