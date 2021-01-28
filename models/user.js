@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
      
     },
-    UserLogin: {
+    UserName: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
      
@@ -33,10 +33,10 @@ module.exports = function(sequelize, DataTypes) {
       // allowNull: false
     },
 
-    // profileImage: {
-    //   type: DataTypes.STRING,
-    //   // allowNull: false,
-    // }
+    profileImage: {
+      type: DataTypes.STRING,
+      // allowNull: false,
+    }
     // createdAt: {
     //   type: 'TIMESTAMP',
     //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
