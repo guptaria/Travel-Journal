@@ -73,11 +73,11 @@ module.exports = function(sequelize, DataTypes) {
     // };
 
     // Relationship between location and journal, one location can have multiple journals
-    location.associate = function(models) {
-      location.hasMany(models.journal, {
-      onDelete: "cascade"
-    });
-  };
+  //   location.associate = function(models) {
+  //     location.hasMany(models.journal, {
+  //     onDelete: "cascade"
+  //   });
+  // };
 
     return location;
   };
