@@ -37,6 +37,12 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
       }
 
+  },
+  {
+    createdAt: false,
+    updatedAt: false,
+    timestamps: false
+
   });
 
   // Relationship between user and journal, one user can have multiple journals

@@ -13,6 +13,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
      
     },
+    UserLogin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+     
+    },
     // The email cannot be null, and must be a proper email before creation
     email: {
       type: DataTypes.STRING,
@@ -25,27 +30,33 @@ module.exports = function(sequelize, DataTypes) {
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      // allowNull: false
     },
 
-    profileImage: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    createdAt: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
+    // profileImage: {
+    //   type: DataTypes.STRING,
+    //   // allowNull: false,
+    // }
+    // createdAt: {
+    //   type: 'TIMESTAMP',
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    //   allowNull: false
      
-    },
-    updatedAt: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
+    // },
+    // updatedAt: {
+    //   type: 'TIMESTAMP',
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    //   allowNull: false
      
-    },
+    // },
  
-  });
+  },{
+    createdAt: false,
+    updatedAt: false,
+    timestamps: false
+
+  })
+  ;
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
   User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
