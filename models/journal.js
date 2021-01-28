@@ -22,6 +22,7 @@ module.exports = function (sequelize, DataTypes) {
 
   });
 
+  // Relationship between user and journal, one user can have multiple journals
   journal.associate = function (models) {
     journal.belongsTo(models.User, {
       foreignKey: {
@@ -29,6 +30,16 @@ module.exports = function (sequelize, DataTypes) {
       }
     });
   };
+
+  // Relationship between location and journal, one location can have multiple journals
+  journal.associate = function (models) {
+    journal.belongsTo(models.location, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return journal;
 };
 

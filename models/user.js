@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
 
-  //Creating one to many relationship with the journal table. Basically one user can have more than one journals
+  //Creating one to many relationship with the journal table. Basically one user can have more than one journals in the database
 
   User.associate = function(models) {
     // Associating User with journal
@@ -53,5 +53,23 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
   };
+
+  //Creating one to many relationship with the location table. Basically one user can have more than one location in the database
+  // User.associate = function(models) {
+  //   // Associating User with location
+  //   // When an User is deleted, also delete any associated location
+  //   User.hasMany(models.location, {
+  //     onDelete: "cascade"
+  //   });
+  // };
+
+  //Many to Many realationship between user and location
+  User.associate = (models) => {
+  User.belongsToMany(models.location, {
+    through: "merge",
+    as: "users",
+    foreignKey: "user_id",
+  });
+};
   return User;
 };
