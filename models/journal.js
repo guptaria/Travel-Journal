@@ -19,6 +19,23 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
+    location: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    start_date: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+    },
+    end_date: {
+      type: 'TIMESTAMP',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: false
+      }
 
   });
 
@@ -32,13 +49,13 @@ module.exports = function (sequelize, DataTypes) {
   };
 
   // Relationship between location and journal, one location can have multiple journals
-  journal.associate = function (models) {
-    journal.belongsTo(models.location, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // journal.associate = function (models) {
+  //   journal.belongsTo(models.location, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   return journal;
 };
