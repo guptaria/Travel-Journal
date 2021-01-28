@@ -12,37 +12,73 @@ module.exports = function(sequelize, DataTypes) {
           len: [1-50]
         }
       },
-    //  lattitude: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //     validate: {
-    //       len: [1]
-    //     }
-    //   },
-    //   longitude: {
-    //     type: DataTypes.TEXT,
-    //     allowNull: false,
-    //     validate: {
-    //       len: [1]
-    //     }
-    //   }
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1-50]
+        }
+      },
+      state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1-50]
+        }
+      },
+      country: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1-50]
+        }
+      },
+    
+     lattitude: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      },
+      longitude: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      }
      
-    point: {
-        type: DataTypes.GEOMETRY('POINT'),
-        allowNull: false
-    }
+    // point: {
+    //     type: DataTypes.GEOMETRY('POINT'),
+    //     allowNull: false
+    // }
     });
 
+    //Many to Many realationship between user and location
+    location.associate = (models) => {
+      location.belongsToMany(models.User, {
+        through: "merge",
+        as: "locations",
+        foreignKey: "location_id",
+      });
+    };
 
-// Add a belongsTo association to journal here
-  location.associate = function (models){
-    models.location.belongsTo(models.journal,{
-    onDelete:'CASCADE',
-    foreignKey:{
-      allowNull:false
-    }
-  });
-  }
+    // location.associate = function (models) {
+    //   location.belongsTo(models.User, {
+    //     foreignKey: {
+    //       allowNull: false
+    //     }
+    //   });
+    // };
+
+    // Relationship between location and journal, one location can have multiple journals
+    location.associate = function(models) {
+      location.hasMany(models.journal, {
+      onDelete: "cascade"
+    });
+  };
+
     return location;
   };
 
