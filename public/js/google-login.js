@@ -61,7 +61,11 @@ $(document).ready(() => {
   
   function postFromGoogle(googleEmail) {
   console.log(googleEmail);
-  
+  // var obj{
+  //   email:bjhhgh
+  //   name:nvh
+  //   UserLogin:signup with our website
+  // }
     $.post("/api/glogin", {
       email: googleEmail
       // password: password
