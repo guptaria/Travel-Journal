@@ -58,7 +58,7 @@ function initMap() {
       position: markerLocation,
       map: map
     });
-    console.log("markerLocation = " + markerLocation);
+    // console.log("markerLocation = " + markerLocation);
     latlngbounds.extend(markerLocation);
   }
   map.fitBounds(latlngbounds);
@@ -77,7 +77,7 @@ function getGeolocation(placeName) {
   //   zoom: 4,
   // });
 
-  console.log("placeName = " + placeName);
+  // console.log("placeName = " + placeName);
   const request = {
     query: placeName,
     fields: ["name", "geometry"]
@@ -100,65 +100,56 @@ function getGeolocation(placeName) {
         // console.log("longtitude = " + longtitude);
 
         const geoLocationArr = [placeName, latitude, longtitude]
-        console.log("geoLocationArr = " + geoLocationArr);
+        // console.log("geoLocationArr = " + geoLocationArr);
 
         // Add new place into existing array
         userListArr.push(geoLocationArr);
         // console.log("userListArr = " + userListArr);
-        console.log("userListArr[0] = " + userListArr[0]);
-        console.log("userListArr[1] = " + userListArr[1]);
-        console.log("userListArr[2] = " + userListArr[2]);
-        console.log("userListArr[3] = " + userListArr[3]);
-        console.log("userListArr[4] = " + userListArr[4]);
-        
+        // console.log("userListArr[0] = " + userListArr[0]);
+        // console.log("userListArr[1] = " + userListArr[1]);
+        // console.log("userListArr[2] = " + userListArr[2]);
+        // console.log("userListArr[3] = " + userListArr[3]);
+        // console.log("userListArr[4] = " + userListArr[4]);
+
         renderJournal(userListArr);
         initMap(userListArr);
-
         // console.log("geoLocationArr[0]" + geoLocationArr[0]);
         // console.log("geoLocationArr[1]" + geoLocationArr[1]);
         // console.log("geoLocationArr[2]" + geoLocationArr[2]);
-
-        // const geoLocationObj = {
-        //   place : placeName,
-        //   lat: latitude,
-        //   lang: longtitude
-        // }
-        // console.log("geoLocationObj.place" + geoLocationObj.place);
-        // console.log("geoLocationObj.lat" + geoLocationObj.lat);
-        // console.log("geoLocationObj.lang" + geoLocationObj.lang);
       }
     }
   });
 }
 
-
-
 function renderJournal() {
   console.log("userListArr = " + userListArr);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><button class="recent btn btn-link">${userListArr[i][0]}</button></td>`);
+      $(`#row${i}`).html(`<td><button class="recent btn btn-link">${userListArr[i][0]}</button><button class="delete"><i class="fas fa-trash-alt"></i></button></td>`);
     }
   }
 }
 
+function landingMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 2,
+    center: new google.maps.LatLng(37.0902, -95.7129)
+  });
+}
 
-// function createMarker(place) {
-//   const marker = new google.maps.Marker({
-//     map,
-//     position: place.geometry.location,
-//   });
-//   google.maps.event.addListener(marker, "click", () => {
-//     infowindow.setContent(place.name);
-//     infowindow.open(map);
-//   });
-// }
 
 //////////////////////////// EXECUTION ////////////////////////////////////////
 
 $(document).ready(function () {
+
   renderJournal();
-  initMap(userListArr);
+
+  if (userListArr.length === 0) {
+    landingMap();
+  } else {
+    initMap(userListArr);
+  }
+
 
   $("#searchBtn").click(function (event) {
     event.preventDefault;
@@ -167,7 +158,6 @@ $(document).ready(function () {
     getGeolocation(placeName);
   })
 });
-
 
 
 //////////////////////////////// BACK UP CODE //////////////////////////////////
@@ -203,20 +193,20 @@ $(document).ready(function () {
   //     ["Frankin BBQ", 30.2701, -97.7313],
   //     ["The Oasis on Lake Travis", 30.4057, -97.8741]
   //   ];
-  
+
   //   // Always center the first location
   //   const userLocation1LaLong = new google.maps.LatLng(
   //     locations[0][1],
   //     locations[0][2]
   //   );
-  
+
   //   const map = new google.maps.Map(document.getElementById("map"), {
   //     zoom: 13,
   //     // center: { lat: -25.344, lng: 131.036 },
   //     // center: new google.maps.LatLng(49.343085, -123.305938),
   //     center: userLocation1LaLong
   //   });
-  
+
   //   // Drop pins on all locations
   //   const latlngbounds = new google.maps.LatLngBounds();
   //   for (i = 0; i < locations.length; i++) {
@@ -225,7 +215,7 @@ $(document).ready(function () {
   //       locations[i][1],
   //       locations[i][2]
   //     );
-  
+
   //     // eslint-disable-next-line no-unused-vars
   //     const marker = new google.maps.Marker({
   //       // position: { lat: -25.344, lng: 131.036 },
@@ -236,5 +226,17 @@ $(document).ready(function () {
   //     latlngbounds.extend(markerLocation);
   //   }
   //   map.fitBounds(latlngbounds);
-  
+
   // }
+
+
+// function createMarker(place) {
+//   const marker = new google.maps.Marker({
+//     map,
+//     position: place.geometry.location,
+//   });
+//   google.maps.event.addListener(marker, "click", () => {
+//     infowindow.setContent(place.name);
+//     infowindow.open(map);
+//   });
+// }
