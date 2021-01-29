@@ -125,18 +125,26 @@ function renderJournal() {
   console.log("userListArr = " + userListArr);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><button class="r">${userListArr[i][0]}</button>
+      $(`#row${i}`).html(`<td><button class="">${userListArr[i][0]}</button>
       <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
       <button class="" style="float:right"><i class="fas fa-camera"></i></button>
       <button class="" style="float:right"><i class="fas fa-comment-dots"></i></button></td>`);
+
+      $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
+
     }
   }
+
+
 }
 
 function landingMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
-    center: new google.maps.LatLng(37.0902, -95.7129)
+    // landing page center on united states
+    center: new google.maps.LatLng(37.0902, -95.7129),
+    mapTypeId: 'satellite'
+
   });
 }
 
