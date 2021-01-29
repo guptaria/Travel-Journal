@@ -322,6 +322,7 @@ a:-webkit-any-link {
     background: white;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -341,8 +342,8 @@ a:-webkit-any-link {
 }
 
 #slide-show {
-    width: 100%;
-    height: 30vw;
+    width: 85%;
+    height: 25vw;
     perspective: 1000px;
     transform-style: preserve-3d;
 }
@@ -351,8 +352,8 @@ a:-webkit-any-link {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
-    width: 50%;
-    height: 30vw;
+    width: 40%;
+    height: 25vw;
     border-radius: 7px;
     position: absolute;
     left: 0;
@@ -363,8 +364,7 @@ a:-webkit-any-link {
 .customer-img {
     border-radius: 6px;
     width: 100%;
-
-    height: 30vw;
+    height:25vw;
 }
 .quote {
     text-align: center;
@@ -423,10 +423,107 @@ a:-webkit-any-link {
 /* ========================================================== */
 /* Footer */
 footer {
+    background: rgb(29, 29, 29);
     width: 100%;
-    height: 20vh;
+    height: 47vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Social Media Icons Container*/
+.icons-container{
+    width: 50%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    height: 10vh;
+    padding-top: 50px;
+}
+.icons{
+    margin: 5px;
+}
+.icons i{
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
+cursor: pointer;
+}
+/* All Icons */
+.fa-facebook{
+    background: rgb(65, 131, 255);
+    color: white;
+}
+.fa-twitter{
+    background: rgb(102, 181, 255);
+    color: white;
+}
+.fa-instagram{
+    color: white;
+    background-image: url(../img/insta-background.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fa-youtube{
+    background: rgb(255, 65, 65);
+    color: white;
+}
+.fa-linkedin-in{
+    background: rgb(62, 159, 238);
+    color: white;
+}
+.fa-apple{
+    color: rgb(98, 98, 98);
+}
+.fa-google{
+    color: rgb(98, 98, 98);
+
+}
+.fa-js{
+    color: rgb(98, 98, 98);
+
+}
+.fa-github{
+    color: rgb(98, 98, 98);
+
+}
+/* Footer Info */
+.footer-info{
+    width: 65%;
+}
+.footer-info ul{
+    display: flex;
+    justify-content: space-evenly;
+    justify-self: center;
+    align-items: center;
+    height: 10vh;
+    list-style-type: none;
+    color: rgb(98, 98, 98);
+}
+.footer-info ul a{
+    color: rgb(98, 98, 98);
+}
+.support-title{
+        color: rgb(98, 98, 98);
+        font-size: 13px;
+        padding-top: 10px;
+}
+.support-container{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 10vh;
+}
+.support-container i{
+    font-size: 17px;
+}
+.copy-write{
+    color: rgb(98, 98, 98);
+    font-size: 15px;
 }
