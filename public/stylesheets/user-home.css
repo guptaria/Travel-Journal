@@ -1,0 +1,192 @@
+:root {
+    --darkBlue: rgb(0, 73, 183);
+    --lightBlue: rgb(0, 221, 255);
+    --pink: rgb(247, 89, 144);
+    --yellow: rgb(255, 246, 133);
+    --red: rgb(255, 29, 88);
+}
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: 'Nanum Myeongjo', serif;
+}
+/* ========================================================== */
+/* home screen */
+.homeScreen {
+    height: 100vh;
+    z-index: -2;
+    background: url(../img/milkyway.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.home-screen-fade {
+    height: 100vh;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.267),
+        rgba(77, 77, 77, 0) 30%,
+        rgba(77, 77, 77, 0) 50%,
+        rgba(163, 163, 163, 0.342) 80%,
+        rgba(255, 255, 255, 0.287) 100%
+    );
+    z-index: -2;
+}
+/* ========================================================== */
+/* Nav Bar */
+nav {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.navcontainer {
+    font-family: 'Nanum Myeongjo', serif;
+    align-items: center;
+    background: transparent;
+    display: flex;
+    height: 8vh;
+    justify-content: space-evenly;
+}
+a:-webkit-any-link {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    text-transform: uppercase;
+    width: 300px;
+    text-align: center;
+    color: white;
+    height: 5vh;
+    padding-bottom: 20px;
+    margin-top: 5px;
+}
+
+.nav-links ul {
+    list-style: none;
+}
+.nav-links li a {
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+#nav-links-border1 {
+    border-right: solid white 2px;
+    padding-right: 10px;
+}
+#nav-links-border2 {
+    border-left: solid white 2px;
+    padding-left: 10px;
+}
+/* ========================================================== */
+/* Map */
+.map-container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.map {
+    width: 40%;
+    height: 100%;
+}
+#earth_div {
+    width: 100%;
+    height: 100%;
+}
+.cesium-credit-textContainer:before {
+    display: none;
+}
+.cesium-credit-text{
+  display: none;
+}
