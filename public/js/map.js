@@ -125,7 +125,10 @@ function renderJournal() {
   console.log("userListArr = " + userListArr);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><button class="recent btn btn-link">${userListArr[i][0]}</button><button class="delete"><i class="fas fa-trash-alt"></i></button></td>`);
+      $(`#row${i}`).html(`<td><button class="recent btn btn-link">${userListArr[i][0]}</button>
+      <button class="delete"><i class="fas fa-trash-alt"></i></button>
+      <button class=""><i class="fas fa-camera"></i></button>
+      <button class=""><i class="fas fa-comment-dots"></i></button></td>`);
     }
   }
 }
@@ -153,8 +156,10 @@ $(document).ready(function () {
 
   $("#searchBtn").click(function (event) {
     event.preventDefault;
+    
     // WORKING SKIPPED FOR NOW TO SAVE API CALL
     var placeName = $('input').val();
+    $('input').val('')
     getGeolocation(placeName);
   })
 });
