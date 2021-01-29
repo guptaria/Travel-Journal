@@ -17,16 +17,8 @@
 
     <!-- GOOGLE MAPS API NEED TO REPLACE API KEY WITH DOTENV FILE -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&libraries=places&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyaTv1sO1paK-4TSHmoyktQbCiNHiIzQA&libraries=places&callback=initMap&v=weekly"
         defer></script>
-
-
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&libraries=places"> -->
-
-
-    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
-
-    <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE"></script> -->
 
     <!-- BOOTSTRAP CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -81,7 +73,7 @@
                 </table>
 
                 <!-- add search place to journal -->
-                <div style="float:right"><button>Add Places to Journal</button></div>
+                <div style="float:right"><button>Create the Journal</button></div>
 
             </div>
 
@@ -94,28 +86,29 @@
                 <div class="card card-md-12 mt-3 mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <div id="" class="h3 navbar-text col-md-auto">Welcome Import User Name from table here</div>
-                            <!-- <div class="col-md-2"><img id="weatherIcon"></div> -->
+                            <div id="" class="h3 navbar-text col-md-auto">Welcome - User Name from Users.userName and Users.profileImage</div>
                         </div>
-                        <!-- <span id="temperature"></span>
-                        <span id="humidity"></span>
-                        <span id="windSpeed"></span>
-                        <span id="uvIndex"></span> -->
                     </div>
                 </div>
 
 
                 <!-- Trip Name -->
-                <div class="row">
-                    <h3 class="ml-3">Austin Day Trip</h3>
+                <div class="card card-md-12 mt-3 mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3 class="ml-3">Austin Day Trip - Need to pull from journals.journalTitle table</h3>
+                        </div>
+                    </div>
                 </div>
-                <br>
                 <!-- Map -->
-                <div id="map" class="row"></div>
-                <br>
+                <div class="card card-md-12 mt-3 mb-4">
+                    <div id="map" class="row"></div>
+                </div> 
                 <!-- Journal Details -->
-                <div class="row" style="border:solid black; height: 300px;">
-                    <h3 class="ml-3">Place Journal</h3>
+                <div class="card card-md-12 mt-3 mb-4" style="border:solid black; height: 300px;">
+                    <div class="row" >
+                        <h3 class="ml-3">Place Journal - Need to pull from journals.journalEntry table</h3>
+                    </div>
                 </div>
 
             </div>
