@@ -33,7 +33,7 @@ function initialize() {
         var c = earth.getPosition();
         var elapsed = before ? now - before : 0;
         before = now;
-        earth.setCenter([c[0], c[1] + 0.0 * (elapsed / 30)]);
+        earth.setCenter([c[0], c[1] + 0.3 * (elapsed / 30)]);
         requestAnimationFrame(animate);
     });
     earth.setView([2.8011, 8.2266], 2.2);
