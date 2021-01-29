@@ -112,7 +112,7 @@ body {
     background: linear-gradient(
         rgba(77, 77, 77, 0.479),
         rgba(77, 77, 77, 0.479) 57%,
-        rgba(77, 77, 77, 0.671) 80%,
+        rgba(163, 163, 163, 0.671) 80%,
         white 100%
     );
     z-index: -2;
@@ -187,38 +187,42 @@ a:-webkit-any-link {
 /* Trusted by*/
 
 .Sponsored {
-    font-size: 2rem;
+    font-size: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .Sponsored h5 {
-border-bottom: solid rgba(116, 116, 116, 0.63) 5px;
-        border-top: solid rgba(116, 116, 116, 0.63) 5px;    border-radius: 15px;
+    border-bottom: solid rgba(116, 116, 116, 0.63) 5px;
+        border-radius: 15px;
     width: 200px;
-    padding: 5px;
+    text-align: center;
+    padding-bottom: 5px;
 }
-.tusted-container1{
+.tusted-container1 {
     margin-top: 30px;
     width: 100%;
-    height: 30vh;
+    height: 20vh;
     display: flex;
     justify-content: center;
+    margin-bottom: 75px;
+        margin-top: 75px;
+
 }
 .tusted-container {
     width: 85%;
-    height: 30vh;
+    height: 20vh;
     display: flex;
     flex-direction: column;
-align-items: center;    
-justify-content: center;
-border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
-        border-top: solid rgba(116, 116, 116, 0.63) 10px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
+    border-top: solid rgba(116, 116, 116, 0.63) 10px;
 
     border-radius: 30px;
 }
-.new-shit{
+.new-shit {
     width: 90%;
     height: 20vh;
     display: flex;
@@ -229,12 +233,23 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
     justify-content: center;
     align-items: center;
     width: 25%;
+    height: 75px;
 }
 .tusted-container img {
     width: 50%;
 }
+#washington {
+    width: 100%;
+}
+#nat-geo {
+    width: 70%;
+}
+#amazon {
+    width: 70%;
+}
 #bitcoin {
-    width: 75px;
+    width: 60px;
+    padding-bottom: 20px;
 }
 /* ========================================================== */
 /* About Company */
@@ -303,8 +318,11 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 /* ========================================================== */
 /* Customers Section */
 .customer-container {
-    height: 90vh;
+    height: 100vh;
     background: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .customer-header {
@@ -314,6 +332,8 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
     width: 100%;
     text-align: center;
     color: black;
+    margin-bottom: 50px;
+    letter-spacing: 10px;
 }
 
 [type='radio'] {
@@ -322,7 +342,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 
 #slide-show {
     width: 100%;
-    height: 25vw;
+    height: 30vw;
     perspective: 1000px;
     transform-style: preserve-3d;
 }
@@ -331,8 +351,8 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
-    width: 40%;
-    height: 25vw;
+    width: 50%;
+    height: 30vw;
     border-radius: 7px;
     position: absolute;
     left: 0;
@@ -344,7 +364,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
     border-radius: 6px;
     width: 100%;
 
-    height: 25vw;
+    height: 30vw;
 }
 .quote {
     text-align: center;
@@ -361,7 +381,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 #s4:checked ~ #slide2,
 #s5:checked ~ #slide3 {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-    transform: translate3d(-30%, 0, -200px);
+    transform: translate3d(-60%, 0, -200px);
 }
 
 #s1:checked ~ #slide5,
@@ -370,7 +390,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 #s4:checked ~ #slide3,
 #s5:checked ~ #slide4 {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-    transform: translate3d(-15%, 0, -100px);
+    transform: translate3d(-40%, 0, -100px);
 }
 
 #s1:checked ~ #slide1,
@@ -389,7 +409,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 #s4:checked ~ #slide5,
 #s5:checked ~ #slide1 {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-    transform: translate3d(15%, 0, -100px);
+    transform: translate3d(40%, 0, -100px);
 }
 
 #s1:checked ~ #slide3,
@@ -398,7 +418,7 @@ border-bottom: solid rgba(116, 116, 116, 0.63) 10px;
 #s4:checked ~ #slide1,
 #s5:checked ~ #slide2 {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
-    transform: translate3d(30%, 0, -200px);
+    transform: translate3d(60%, 0, -200px);
 }
 /* ========================================================== */
 /* Footer */
