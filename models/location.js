@@ -53,6 +53,12 @@ module.exports = function(sequelize, DataTypes) {
     //     type: DataTypes.GEOMETRY('POINT'),
     //     allowNull: false
     // }
+    },
+    {
+      createdAt: false,
+      updatedAt: false,
+      timestamps: false
+  
     });
 
     //Many to Many realationship between user and location
