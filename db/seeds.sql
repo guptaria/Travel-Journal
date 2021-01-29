@@ -2,7 +2,7 @@ USE traveljournal_db;
 INSERT INTO Users (userName, email, password,profileImage)
 VALUES
     ("sonni williams", "example1@mail.com", "$2a$12$e0NWf","123"),
-   (" Thammarak thammaraku", "example2@mail.com", "$2aliKWNWf","123"),
+   ("Thammarak thammaraku", "example2@mail.com", "$2aliKWNWf","123"),
    ("Christian Romero", "example3@mail.com", "$2a$12$e0NWf","123"),
    ("Priya Garg", "example4@mail.com", "$2a$WNWf","123"),
    ("jones liddy", "example5@mail.com", "$2a$liKWNWf","123");
