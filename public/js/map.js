@@ -13,26 +13,49 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
     // center: { lat: -25.344, lng: 131.036 },
-    center: new google.maps.LatLng(37.0902, -95.7129)
+    // center: new google.maps.LatLng(37.0902, -95.7129)
   });
 
   // Drop pins on all locations
   const latlngbounds = new google.maps.LatLngBounds();
-  for (i = 0; i < userListArr.length; i++) {
+  
+  if (userListArr.length === 1) {
     const markerLocation = new google.maps.LatLng(
-      userListArr[i].lat,
-      userListArr[i].lang
+      userListArr[0].lat,
+      userListArr[0].lang
     );
 
-    // eslint-disable-next-line no-unused-vars
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      // center: { lat: -25.344, lng: 131.036 },
+      center: new google.maps.LatLng(userListArr[0].lat, userListArr[0].lang)
+    });
+
     const marker = new google.maps.Marker({
-      // position: { lat: -25.344, lng: 131.036 },
-      position: markerLocation,
+      position: new google.maps.LatLng(userListArr[0].lat, userListArr[0].lang),
       map: map
     });
-    latlngbounds.extend(markerLocation);
-  }
-  map.fitBounds(latlngbounds);
+
+  } else {
+
+      for (i = 0; i < userListArr.length; i++) {
+        const markerLocation = new google.maps.LatLng(
+          userListArr[i].lat,
+          userListArr[i].lang
+        );
+
+        // eslint-disable-next-line no-unused-vars
+        const marker = new google.maps.Marker({
+          // position: { lat: -25.344, lng: 131.036 },
+          position: markerLocation,
+          map: map
+        });
+        latlngbounds.extend(markerLocation);
+      }
+      map.fitBounds(latlngbounds);
+
+    }
+
 }
 
 function postLocation(geoLocationObj) {

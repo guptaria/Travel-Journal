@@ -54,6 +54,7 @@ module.exports = function(app) {
       console.log("req.body.place = " + req.body.place);
       console.log("req.body.latitude = " + req.body.latitude);
       console.log("req.body.longitude = " + req.body.longitude);
+      
     db.location.create({
       place: req.body.place,
       latitude: req.body.latitude,
