@@ -126,12 +126,11 @@ function renderJournal() {
   console.log("userListArr = " + userListArr);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><button class="">${userListArr[i][0]}</button>
+      $(`#row${i}`).html(`<td><p class="">${userListArr[i][0]}</p>
       <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-      <button class="" style="float:right"><i class="fas fa-camera"></i></button>
-      <button class="" style="float:right"><i class="fas fa-comment-dots"></i></button></td>`);
+      <button class="" style="float:right"><i class="fas fa-camera"></i></button></td>`);
 
-      $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
+      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
 
     }
   }
