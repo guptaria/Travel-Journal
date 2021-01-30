@@ -24,22 +24,6 @@ $(document).ready(() => {
     passwordInput.val("");
   });
 
-  //Finding user in db
-  const existingUser = Users.findByEmail(profile.getEmail());
-  //  if user is found, return the data using the next() callback
-  if (existingUser) {
-    return next(null, existingUser);
-  }
-
-  // if not in database, then we are creating a new user
-  const newUser = {
-    userName: profile.getName(),
-    email: profile.getEmail(),
-    profileImage: profile.getImage(),
-  };
-
-  next(null, Users.create(newUser));
-
   // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
   function loginUser(email, password) {
     $.post("/api/login", {
@@ -47,7 +31,7 @@ $(document).ready(() => {
       password: password
     })
       .then(() => {
-        window.location.replace("/members");
+        window.location.replace("/home");
         // If there's an error, log the error
       })
       .catch(err => {
@@ -72,18 +56,21 @@ function onSignIn(googleUser) { // eslint-disable-line no-unused-vars
   console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
 
   let googleEmail = profile.getEmail();
-  postFromGoogle(googleEmail);
+  let googleName = profile.getName();
+  let googleImageURL = profile.getImageUrl();
+  postFromGoogle(googleEmail, googleName, googleImageURL);
 }
 
-function postFromGoogle(googleEmail) {
+function postFromGoogle(googleEmail, googleName, googleImageURL) {
   console.log(googleEmail);
 
-  $.post("/api/glogin", {
-    email: googleEmail
-    // password: password
+  $.post("/api/google/login", {
+    email: googleEmail,
+    userName: googleName,
+    profileImage: googleImageURL
   })
     .then(() => {
-      window.location.replace("/members");
+      window.location.replace("/home");
       // If there's an error, log the error
     })
     .catch(err => {
@@ -98,8 +85,4 @@ function signOut() { // eslint-disable-line no-unused-vars
     $("#signout-container").hide();
     $("#signin-container").show();
   });
-
-
-
-
 }
