@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     userName: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      //allowNull: false,
      
     },
     // The email cannot be null, and must be a proper email before creation
@@ -41,11 +41,23 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       // allowNull: false,
     }
+    // createdAt: {
+    //   type: 'TIMESTAMP',
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    //   allowNull: false
+     
+    // },
+    // updatedAt: {
+    //   type: 'TIMESTAMP',
+    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+    //   allowNull: false
+     
+    // },
  
-  // },{
-  //   createdAt: false,
-  //   updatedAt: false,
-  //   timestamps: false
+  },{
+    createdAt: false,
+    updatedAt: false,
+    timestamps: false
 
   })
   ;
@@ -56,7 +68,9 @@ module.exports = function(sequelize, DataTypes) {
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
   User.addHook("beforeCreate", function(user) {
-    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    if(user.password) { // if user password isn't empty, then assume this is a local login and encrypt password
+      user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    }
   });
 
   //Creating one to many relationship with the journal table. Basically one user can have more than one journals in the database
