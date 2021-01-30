@@ -47,7 +47,7 @@
 
             <!-- Search box on the left three parts-->
             <div id="placeSearch" class="col-md-3 bg-light mt-3">
-                <h4 class="mt-3">Add Places To Your Journal</h4>
+                <h4 class="mt-3">Add locations to your adventure</h4>
 
                 <!-- Places Search -->
                 <div class="input-group mb-3">
@@ -73,7 +73,7 @@
                 </table>
 
                 <!-- add search place to journal -->
-                <div style="float:right"><button>Create the Journal</button></div>
+                <!-- <div style="float:right"><button>Create the Journal</button></div> -->
 
             </div>
 
@@ -92,24 +92,42 @@
                 </div>
 
 
-                <!-- Trip Name -->
-                <div class="card card-md-12 mt-3 mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <h3 class="ml-3">Austin Day Trip - Need to pull from journals.journalTitle table</h3>
-                        </div>
-                    </div>
-                </div>
+        
                 <!-- Map -->
                 <div class="card card-md-12 mt-3 mb-4">
                     <div id="map" class="row"></div>
                 </div> 
+                 <!-- Trip Name -->
+                 <div class="card card-md-12 mt-3 mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <h3 class="ml-3"> Display input field value here after choosing save - Need to pull from journals.journalTitle table</h3>
+                            
+                            <div><input type="text"><input type="date"><button>Save</button></div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Journal Details -->
                 <div class="card card-md-12 mt-3 mb-4" style="height: 300px;">
                     <div class="row" id="journal_row" >
-                        <h3 class="ml-3">Place Journal - Need to pull from journals.journalEntry table</h3>
+                        <h3 class="ml-3">Journal Entry - Need to pull from journals.journalEntry table</h3>
+                        <!-- Example code from crud activity must be modified 
+                        UTA-AUS-FSF-PT-10-2020-U-C/14-Full-Stack/01-Activities/12-Blog-CRUD/Solved/public/cms.html-->
+                    
+                        <div class="col-md-5 offset-md-3">
+                            <form id="cms">
+                              <div class="form-group">
 
-                        <table class="table">
+                                <label for="body">Journal:</label>
+                                <textarea class="form-control" rows="10" id="body"></textarea>
+                                <div class="form-group">
+                                </div>
+                                <br />
+                                <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+                              </div>
+                            </form>
+                          </div>
+                        <!-- <table class="table">
                             <tbody>
                                 <tr id="journal_row0"></tr>
                                 <tr id="journal_row1"></tr>
@@ -117,7 +135,7 @@
                                 <tr id="journal_row3"></tr>
                                 <tr id="journal_row4"></tr>
                             </tbody>
-                        </table>
+                        </table> -->
 
                     </div>
                 </div>
