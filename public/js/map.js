@@ -138,16 +138,19 @@ $(document).ready(function () {
       "lat": "30.2849185",
       "lang": "-97.7340567"
     }];
-    console.log("newTrip = " + newTrip);
+    console.log("newTrip[0] = " + newTrip[0]);
 
-    postLocations(newTrip);
-
+    postLocations(newTrip[0].place, newTrip[0].lat, newTrip[0].lang);
   }
 
-    function postLocations(newTrip) {
-      $.post("/api/location", newTrip)
+    function postLocations(place, latitude, longitude) {
+      $.post("/api/location", {
+        place: place,
+        latitude: latitude,
+        longitude: longitude
+      })
         .then(function (data) {
-          // console.log(data);
+          // window.location.replace("/user_journal");
           alert("Adding character...");
       });
     }
