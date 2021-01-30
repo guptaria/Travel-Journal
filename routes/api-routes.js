@@ -51,6 +51,9 @@ module.exports = function(app) {
  // Thammarak Try Post Journal
   app.post("/api/location", function(req, res) {
 
+      console.log("req.body.place = " + req.body.place);
+      console.log("req.body.latitude = " + req.body.latitude);
+      console.log("req.body.longitude = " + req.body.longitude);
     db.location.create({
       place: req.body.place,
       latitude: req.body.latitude,

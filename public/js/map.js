@@ -35,6 +35,27 @@ function initMap() {
   map.fitBounds(latlngbounds);
 }
 
+function postLocation(geoLocationObj) {
+  console.log("postLocations = " + geoLocationObj);
+  console.log("postLocations = " + geoLocationObj.place);
+  console.log("postLocations = " + geoLocationObj.lat);
+  console.log("postLocations = " + geoLocationObj.lang);
+
+  const place = geoLocationObj.place;
+  const latitude = geoLocationObj.lat;
+  const longitude = geoLocationObj.lang;
+
+  $.post("/api/location", {
+    place: place,
+    latitude: latitude,
+    longitude: longitude
+  })
+    .then(function (data) {
+      // window.location.replace("/user_journal");
+      alert("Adding character...");
+    });
+}
+
 function getGeolocation(placeName) {
   infowindow = new google.maps.InfoWindow();
   var map = new google.maps.Map(document.getElementById("map"));
@@ -61,16 +82,31 @@ function getGeolocation(placeName) {
           "lat": latitude,
           "lang": longitude
         }
-        userListArr.push(geoLocationObj);
+        collectUserSearch(geoLocationObj);
+
+        // return geoLocationObj;
+        // Moved to collectUserSearch
+        // userListArr.push(geoLocationObj);
+        // // Render new userListArr
+        // renderJournal(userListArr);
+        // initMap(userListArr);
+      }
+    }
+  });
+  // return userListArr;
+  // return geoLocationObj; not defined here
+}
+
+
+function collectUserSearch(geoLocationObj) {
+  console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
+  userListArr.push(geoLocationObj);
 
         // Render new userListArr
         renderJournal(userListArr);
         initMap(userListArr);
-      }
-    }
-  });
-  console.log("userListArr = " + userListArr);
-  return userListArr;
+        postLocation(geoLocationObj);
+
 }
 
 function renderJournal() {
@@ -100,6 +136,9 @@ function landingMap() {
   });
 }
 
+
+
+
 //////////////////////////// EXECUTION ////////////////////////////////////////
 
 $(document).ready(function () {
@@ -128,32 +167,34 @@ $(document).ready(function () {
 
     var placeName = $('input').val();
     $('input').val('')
-
     getGeolocation(placeName);
+
+
+
 
     // Need to add async await here since getGeolocation is slow
     // const newTrip = getGeolocation(placeName);
-    const newTrip = [{
-      "place": "UT Austin",
-      "lat": "30.2849185",
-      "lang": "-97.7340567"
-    }];
-    console.log("newTrip[0] = " + newTrip[0]);
+    // Is newTrip always an array or not
+    // if (newTrip) {
+    //   console.log("newTrip.length = " + newTrip.length);
+    //   for (var i = 0; i < newTrip.length; ++i) {
+    //     console.log("i =" + i);
 
-    postLocations(newTrip[0].place, newTrip[0].lat, newTrip[0].lang);
+    //     // const newTrip = [{
+    //     //   "place": "UT Austin",
+    //     //   "lat": "30.2849185",
+    //     //   "lang": "-97.7340567"
+    //     // }];
+    //     console.log("newTrip[i] = " + newTrip[i]);
+    //     console.log("newTrip[i] = " + newTrip[i].place);
+    //     console.log("newTrip[i] = " + newTrip[i].lat);
+    //     console.log("newTrip[i] = " + newTrip[i].lang);
+
+    //     postLocations(newTrip[i].place, newTrip[i].lat, newTrip[i].lang);
+    //   }
+    // }
   }
 
-    function postLocations(place, latitude, longitude) {
-      $.post("/api/location", {
-        place: place,
-        latitude: latitude,
-        longitude: longitude
-      })
-        .then(function (data) {
-          // window.location.replace("/user_journal");
-          alert("Adding character...");
-      });
-    }
 
 
 });
