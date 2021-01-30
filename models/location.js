@@ -14,27 +14,27 @@ module.exports = function(sequelize, DataTypes) {
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: [1-50]
         }
       },
       state: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: [1-50]
         }
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: [1-50]
         }
       },
     
-     lattitude: {
+     latitude: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
