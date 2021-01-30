@@ -61,11 +61,7 @@ $(document).ready(() => {
   
   function postFromGoogle(googleEmail) {
   console.log(googleEmail);
-  // var obj{
-  //   email:bjhhgh
-  //   name:nvh
-  //   UserLogin:signup with our website
-  // }
+
     $.post("/api/glogin", {
       email: googleEmail
       // password: password
@@ -86,5 +82,22 @@ $(document).ready(() => {
       $("#signout-container").hide();
       $("#signin-container").show();
     });
+
+
+//Finding user in db
+    const existingUser= Users.findByEmail(profile.getEmail());
+    //  if user is found, return the data using the next() callback
+if(existingUser){
+  return next(null,existingUser);
+}
+
+// if not in database, then we are creating a new user
+const newUser={
+  userName:profile.getName(),
+  email:profile.getEmail(),
+  profileImage:profile.getImage(),
+}
+
+
   }
   
