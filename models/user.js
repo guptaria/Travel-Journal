@@ -8,15 +8,9 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
-    userName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-     
-    },
     UserName: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-     
+      allowNull: true,
     },
     // The email cannot be null, and must be a proper email before creation
     email: {
@@ -30,12 +24,12 @@ module.exports = function(sequelize, DataTypes) {
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
-      // allowNull: false
+      allowNull: false
     },
 
     profileImage: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: true,
     }
     // createdAt: {
     //   type: 'TIMESTAMP',
