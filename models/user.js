@@ -8,9 +8,10 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
-    UserName: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+     
     },
     // The email cannot be null, and must be a proper email before creation
     email: {
