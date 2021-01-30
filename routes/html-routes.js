@@ -12,7 +12,8 @@ module.exports = function(app) {
       res.redirect("/members");
     }
     // res.sendFile(path.join(__dirname, "../public/sign-up.html"));
-    res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+    // res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+    res.sendFile(path.join(__dirname, "../public/user_journal.html"));
   });
 
   app.get("/login", function(req, res) {
