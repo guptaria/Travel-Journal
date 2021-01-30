@@ -48,26 +48,26 @@ module.exports = function(app) {
   });
 
  
-   //GET  route for getting all of the yourJournal
-  app.get("/api/journal/", function(req, res) {
-    db.yourJournal.findAll({})
-      .then(function(dbYourJournal) {
-        res.json(dbYourJournal);
-      });
-  });
+//    //GET  route for getting all of the yourJournal
+//   app.get("/api/journal/", function(req, res) {
+//     db.yourJournal.findAll({})
+//       .then(function(dbYourJournal) {
+//         res.json(dbYourJournal);
+//       });
+//   });
 
-// POST route for saving a new journal
-  app.post("/api/journal", function(req, res) {
-    console.log(req.body);
-    db.yourJournal.create({
-      journalTitle: req.body.journalTitle,
-      journalEntry: req.body.journalEntry,
+// // POST route for saving a new journal
+//   app.post("/api/journal", function(req, res) {
+//     console.log(req.body);
+//     db.yourJournal.create({
+//       journalTitle: req.body.journalTitle,
+//       journalEntry: req.body.journalEntry,
     
-    })
-      .then(function(dbYourJournal) {
-        res.json(dbYourJournal);
-      });
-  });
+//     })
+//       .then(function(dbYourJournal) {
+//         res.json(dbYourJournal);
+//       });
+//   });
 
 
   // // Get route for returning yourJournal of a specific category
