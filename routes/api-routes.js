@@ -16,7 +16,8 @@ module.exports = function(app) {
   app.post("/api/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      provider: "local"
     })
       .then(function() {
         res.redirect(307, "/api/login");
@@ -24,6 +25,57 @@ module.exports = function(app) {
       .catch(function(err) {
         res.status(401).json(err);
       });
+  });
+
+  app.post("/api/google/login", function(req, res) {
+
+    const userEmail = req.body.email;
+
+    // Validate email
+    if(!userEmail) {
+      return res.status(401).json({error: "Cannot signup/login due to email NOT found"});
+    }
+
+    // Check and see if user already exists
+    db.User.findOne({
+      where: {
+        email: userEmail
+      }
+    }).then(function(dbUser) {
+      // If user is already exists then we should just add them to session and redirect to homepage
+      if (dbUser) {
+        res.cookie.user = {
+          email: dbUser.email,
+          userName: dbUser.userName,
+          profileImage: dbUser.profileImage
+        };
+        return res.sendStatus(200);
+      }
+  
+      // No user found with the given email, we need to create new user in our database
+      db.User.create({
+        email: req.body.email,
+        userName: req.body.userName,
+        profileImage: req.body.profileImage,
+        provider: "google"
+      })
+      .then(function(dbUser) {
+        res.cookie.user = {
+          email: dbUser.email,
+          userName: dbUser.userName,
+          profileImage: dbUser.profileImage
+        };
+        res.cookie.user = {
+          email: dbUser.email,
+          userName: dbUser.userName,
+          profileImage: dbUser.profileImage
+        };
+        return res.sendStatus(200);
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+    });
   });
 
   // Route for logging user out
@@ -34,17 +86,25 @@ module.exports = function(app) {
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    } else {
-      // Otherwise send back the user's email and id
-      // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
+    console.log(req.session);
+
+    if (req.user) {
+      return res.json({
         email: req.user.email,
         id: req.user.id
       });
     }
+
+    if(res.cookie.user) {
+      return res.json({
+        email: res.cookie.user.email,
+        userName: res.cookie.user.userName,
+        profileImage: res.cookie.user.profileImage
+      });
+    }
+
+    // The user is not logged in, send back an empty object
+    res.json({});
   });
 
  
@@ -121,5 +181,16 @@ module.exports = function(app) {
   // });
 
 };
+
+
+
+
+
+
+
+
+
+
+
 
 

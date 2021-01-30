@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     userName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
      
     },
     // The email cannot be null, and must be a proper email before creation
@@ -22,33 +22,30 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
+    provider: {
+      type: DataTypes.ENUM,
+      values: ["google", "local"],
+      required: true,
+    },
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
-      // allowNull: false
+      avoidNullWhenLocalSignup(value) {
+        if (this.provider==="local" && !value) {
+          throw new Error('You must provide a password since your locally signing up');
+        }
+      }
     },
 
     profileImage: {
       type: DataTypes.STRING,
       // allowNull: false,
     }
-    // createdAt: {
-    //   type: 'TIMESTAMP',
-    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-    //   allowNull: false
-     
-    // },
-    // updatedAt: {
-    //   type: 'TIMESTAMP',
-    //   defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-    //   allowNull: false
-     
-    // },
  
-  },{
-    createdAt: false,
-    updatedAt: false,
-    timestamps: false
+  // },{
+  //   createdAt: false,
+  //   updatedAt: false,
+  //   timestamps: false
 
   })
   ;
