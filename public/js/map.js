@@ -193,6 +193,9 @@ $(document).ready(function () {
 
   const newAddArr = [];
 
+  $(document).on("click", "#pushBtn", handlePushBtnSubmit);
+
+
   function handleSearchBtnSubmit(event) {
     event.preventDefault;
 
@@ -255,6 +258,25 @@ $(document).ready(function () {
     // }
   }
 
+  function handlePushBtnSubmit(event) {
+    event.preventDefault;
+
+    // how to get username to link with this
+    const newTripName = $('#tripName').val();
+
+
+    var newTripName = {
+      // name from name input
+      placeName: $('input').val(),
+      // role from role input
+      date: $("#date").val(),
+      // age from age input
+      journal: $("#journal-body").val(),
+      // points from force-points input
+    };
+
+
+  }
 
 
 });
