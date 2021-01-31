@@ -193,9 +193,6 @@ $(document).ready(function () {
 
   const newAddArr = [];
 
-  $(document).on("click", "#pushBtn", handlePushBtnSubmit);
-
-
   function handleSearchBtnSubmit(event) {
     event.preventDefault;
 
@@ -222,7 +219,7 @@ $(document).ready(function () {
 
     console.log("newAdd.placeName = " + newAdd.placeName);
     console.log("newAdd.date = " + newAdd.date);
-    // console.log("newAdd.journal = " + newAdd.journal);
+    console.log("newAdd.journal = " + newAdd.journal);
 
 
     getGeolocation(newAdd.placeName);
@@ -233,7 +230,7 @@ $(document).ready(function () {
 
     $('input').val("");
     $("#date").val("");
-    $("#journal-body").val("");
+    // $("#journal-body").val("");
 
     // Need to add async await here since getGeolocation is slow
     // const newTrip = getGeolocation(placeName);
@@ -258,25 +255,6 @@ $(document).ready(function () {
     // }
   }
 
-  function handlePushBtnSubmit(event) {
-    event.preventDefault;
-
-    // how to get username to link with this
-    const newTripName = $('#tripName').val();
-
-
-    var newTripName = {
-      // name from name input
-      placeName: $('input').val(),
-      // role from role input
-      date: $("#date").val(),
-      // age from age input
-      journal: $("#journal-body").val(),
-      // points from force-points input
-    };
-
-
-  }
 
 
 });
