@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Google Maps Demo</title>
 
-    <link rel="stylesheet" type="text/css" href="./stylesheets/map-style.css" />
 
      <!-- jQuery library -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,6 +25,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <link rel="stylesheet" type="text/css" href="./stylesheets/map-style.css" />
+
     <!-- ICON LIBRARY -->
     <script src="https://kit.fontawesome.com/f53a07ee43.js" crossorigin="anonymous"></script>
 
@@ -43,13 +44,29 @@
         </div>
     </header> -->
 
-    <!-- BOORSTRAP FOR FULL WIDTH -->
-    <div class="container-fluid">
-        <div class="row">
+     <!--Background Photo-->
+    <!-- <div
+        id="journal-photo"
+        class="bg-5 text-center bg-image"
+        style="background-image: url('../public/img/pexels-messala-ciulla-942872.jpg');
+        "
+    > -->
+<div id="background">
+    <!--Welcome Jumbotron-->
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Welcome Users.userName! and Users.profileImage</h1>
+                <!-- <h3>...</h3> -->
+            </div>
+        </div>
 
+    <!-- BOORSTRAP FOR FULL WIDTH -->
+    <div class="container-fluid" id="entire-card">
+        <div class="row">
+        
             <!-- Search box on the left three parts-->
-            <div id="placeSearch" class="col-md-3 bg-light mt-3">
-                <h4 class="mt-3">Add Places To Your Journal</h4>
+            <div id="placeSearch" class="col-md-3 bg-light mt-3 card row-15">
+                <h4 class="mt-3">Add locations to your adventure</h4>
 
                 <!-- Places Search -->
                 <div class="input-group mb-3">
@@ -75,43 +92,51 @@
                 </table>
 
                 <!-- add search place to journal -->
-                <div style="float:right"><button>Create the Journal</button></div>
-
+                <div style="float:right"><button>Add to Journal</button></div>
             </div>
-
-
 
             <!-- main content-->
             <div class="col-md-9">
 
                 <!-- Map and Journal Content full width-->
-                <div class="card card-md-12 mt-3 mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div id="" class="h3 navbar-text col-md-auto">Welcome - User Name from Users.userName and Users.profileImage</div>
-                        </div>
-                    </div>
-                </div>
 
+             <div class="col-md-12 offset-md-3"></div>  
+                <form id="journal-Title">
+                  <div class="form-group">
+                    <label for="body">Journal Entry Title: Need to pull from journals.journalEntry table</label>
+                    <textarea class="form-control" rows="10" id="body"></textarea>
+                  </div>
+                </form>
 
-                <!-- Trip Name -->
-                <div class="card card-md-12 mt-3 mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <h3 class="ml-3">Austin Day Trip - Need to pull from journals.journalTitle table</h3>
-                        </div>
-                    </div>
-                </div>
+        
                 <!-- Map -->
                 <div class="card card-md-12 mt-3 mb-4">
                     <div id="map" class="row"></div>
                 </div> 
+                
+                 <!-- Trip Name -->
+                 <div class="-md-12 mt-3 mb-4">
+                    <label class="ml-3"> Display input field value here after choosing save - Need to pull from journals.journalTitle table</label>
+                    <div class="card-body">
+                        <div class="row">
+                            <div><input type="text"><input type="date"><button>Save</button></div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Journal Details -->
-                <div class="card card-md-12 mt-3 mb-4" style="height: 300px;">
-                    <div class="row" id="journal_row" >
-                        <h3 class="ml-3">Place Journal - Need to pull from journals.journalEntry table</h3>
-
-                        <table class="table">
+                <!-- <div class="card card-md-12 mt-3 mb-4" style="height: 300px;"> -->
+                    <!-- <div class="row" id="journal_row" > -->
+                        <!-- <h3 class="ml-3">Journal Entry - Need to pull from journals.journalEntry table</h3> -->
+                        <!-- Example code from crud activity must be modified 
+                        UTA-AUS-FSF-PT-10-2020-U-C/14-Full-Stack/01-Activities/12-Blog-CRUD/Solved/public/cms.html-->
+                        <div class="col-md-12 offset-md-3"></div>  
+                            <form id="journal-body">
+                              <div class="form-group">
+                                <label for="body">Journal Entry: Need to pull from journals.journalEntry table</label>
+                                <textarea class="form-control" rows="10" id="body"></textarea>
+                            </div>
+                            </form>
+                        <!-- <table class="table">
                             <tbody>
                                 <tr id="journal_row0"></tr>
                                 <tr id="journal_row1"></tr>
@@ -119,15 +144,19 @@
                                 <tr id="journal_row3"></tr>
                                 <tr id="journal_row4"></tr>
                             </tbody>
-                        </table>
-
+                        </table> -->
+                    
                     </div>
                 </div>
-
             </div>
-
+            <!--Journal Entry Submit Button-->
+            <div class="col-9 mx-auto">
+                <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+            </div>
         </div>
     </div>
+</div>
+   
 
     <!-- google map library -->
     <script src="./js/map.js"></script>

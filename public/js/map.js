@@ -135,14 +135,11 @@ function collectUserSearch(geoLocationObj) {
 function renderJournal() {
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      // recent search
-      $(`#row${i}`).html(`<td><button class="">${userListArr[i].place}</button>
+      $(`#row${i}`).html(`<td><p class="">${userListArr[i][0]}</p>
       <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-      <button class="" style="float:right"><i class="fas fa-camera"></i></button>
-      <button class="" style="float:right"><i class="fas fa-comment-dots"></i></button></td>`);
+      <button class="" style="float:right"><i class="fas fa-camera"></i></button></td>`);
 
-      // journal part below map
-      $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i].place}</p></td>`);
+      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
 
     }
   }
