@@ -18,7 +18,7 @@ function initMap() {
 
   // Drop pins on all locations
   const latlngbounds = new google.maps.LatLngBounds();
-
+  
   if (userListArr.length === 1) {
     const markerLocation = new google.maps.LatLng(
       userListArr[0].lat,
@@ -26,7 +26,8 @@ function initMap() {
     );
 
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
+      // zoom: 12,
+      zoom: 6,
       // center: { lat: -25.344, lng: 131.036 },
       center: new google.maps.LatLng(userListArr[0].lat, userListArr[0].lang)
     });
@@ -38,23 +39,23 @@ function initMap() {
 
   } else {
 
-    for (i = 0; i < userListArr.length; i++) {
-      const markerLocation = new google.maps.LatLng(
-        userListArr[i].lat,
-        userListArr[i].lang
-      );
+      for (i = 0; i < userListArr.length; i++) {
+        const markerLocation = new google.maps.LatLng(
+          userListArr[i].lat,
+          userListArr[i].lang
+        );
 
-      // eslint-disable-next-line no-unused-vars
-      const marker = new google.maps.Marker({
-        // position: { lat: -25.344, lng: 131.036 },
-        position: markerLocation,
-        map: map
-      });
-      latlngbounds.extend(markerLocation);
+        // eslint-disable-next-line no-unused-vars
+        const marker = new google.maps.Marker({
+          // position: { lat: -25.344, lng: 131.036 },
+          position: markerLocation,
+          map: map
+        });
+        latlngbounds.extend(markerLocation);
+      }
+      map.fitBounds(latlngbounds);
+
     }
-    map.fitBounds(latlngbounds);
-
-  }
 
 }
 
@@ -125,39 +126,26 @@ function collectUserSearch(geoLocationObj) {
   console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
   userListArr.push(geoLocationObj);
 
-  // Render new userListArr
-  // renderJournal(userListArr);
-  initMap(userListArr);
-  postLocation(geoLocationObj);
+        // Render new userListArr
+        renderJournal(userListArr);
+        initMap(userListArr);
+        postLocation(geoLocationObj);
 
 }
 
 function renderJournal() {
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><p class="">${userListArr[i].place} ${userListArr[i].date}
+      $(`#row${i}`).html(`<td><p class="">${userListArr[i][0]}</p>
       <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-      <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
-      <p class="">${userListArr[i].journal}</p>
-      </td>`);
+      <button class="" style="float:right"><i class="fas fa-camera"></i></button></td>`);
 
-      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i].place}</p></td>`);
+      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
 
     }
   }
 }
 
-function renderJournal2(newAddArr) {
-  for (var i = 0; i < newAddArr.length; ++i) {
-
-    $(`#row${i}`).html(`<td><p class="">${newAddArr[i].placeName} - ${newAddArr[i].date}
-  <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-  <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
-  <p class="">${newAddArr[i].journal}</p>
-  </td>`);
-
-  }
-}
 
 // To have a landing map when array is first empty
 function landingMap() {
@@ -191,8 +179,6 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  const newAddArr = [];
-
   function handleSearchBtnSubmit(event) {
     event.preventDefault;
 
@@ -200,37 +186,12 @@ $(document).ready(function () {
     //   return;
     // }
 
-
-    // var placeName = $('input').val();
-    // $('input').val('')
-    // getGeolocation(placeName);
-
-
-    var newAdd = {
-      // name from name input
-      placeName: $('input').val(),
-      // role from role input
-      date: $("#date").val(),
-      // age from age input
-      journal: $("#journal-body").val(),
-      // points from force-points input
-    };
+    var placeName = $('input').val();
+    $('input').val('')
+    getGeolocation(placeName);
 
 
-    console.log("newAdd.placeName = " + newAdd.placeName);
-    console.log("newAdd.date = " + newAdd.date);
-    console.log("newAdd.journal = " + newAdd.journal);
 
-
-    getGeolocation(newAdd.placeName);
-
-    newAddArr.push(newAdd);
-    renderJournal2(newAddArr);
-
-
-    $('input').val("");
-    $("#date").val("");
-    // $("#journal-body").val("");
 
     // Need to add async await here since getGeolocation is slow
     // const newTrip = getGeolocation(placeName);
