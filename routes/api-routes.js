@@ -1,5 +1,5 @@
 // Requiring our models and passport as we've configured it
-var db = require("../models");
+var db = require("../models/index.js");
 var passport = require("../config/passport");
 
 module.exports = function(app) {
@@ -19,7 +19,8 @@ module.exports = function(app) {
       password: req.body.password,
       provider: "local"
     })
-      .then(function() {
+      .then(function(dbUser) {
+        console.log(dbUser);
         res.redirect(307, "/api/login");
       })
       .catch(function(err) {
@@ -107,7 +108,29 @@ module.exports = function(app) {
     res.json({});
   });
 
- 
+ // Thammarak Try Post Journal
+  app.post("/api/location", function(req, res) {
+
+      console.log("req.body.place = " + req.body.place);
+      console.log("req.body.latitude = " + req.body.latitude);
+      console.log("req.body.longitude = " + req.body.longitude);
+      
+    db.location.create({
+      place: req.body.place,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
+    })
+      .then(function(dblocations) {
+        // console.log(dblocations);
+        // res.redirect(307, "/api/login");
+        // res.json(dblocations);
+      })
+      // .catch(function(err) {
+      //   res.status(401).json(err);
+      // });
+  });
+
+
 //    //GET  route for getting all of the yourJournal
 //   app.get("/api/journal/", function(req, res) {
 //     db.yourJournal.findAll({})
