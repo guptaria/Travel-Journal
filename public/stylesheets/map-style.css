@@ -12,12 +12,12 @@
   }
 
 #background {
-    background-image: url(../img/Untitled\ design.jpg);
+    background-image: url(../img/journal-background.jpg);
     background-size: cover; 
     margin: 0 auto;
     padding: 0px;
     max-width: 100%; 
-    height: 100vh;
+    height: 35vh;
     max-height: 100%;
     background-position: center center;
     background-repeat: repeat-x;
@@ -25,7 +25,17 @@
     position: sticky;
 }
 
-.jumbotron{
+.home-screen-fade {
+  height: 35vh;
+  background: linear-gradient(
+      rgba()
+      rgba(77, 77, 77, 0.479),
+      rgba(77, 77, 77, 0.479) 57%,
+      rgba(163, 163, 163, 0.671) 80%,
+      white 100%
+  );
+}
+  .jumbotron{
     background-color: transparent !important;
 }
 
