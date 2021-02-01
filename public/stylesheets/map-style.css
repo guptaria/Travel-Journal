@@ -27,20 +27,25 @@
 
 .home-screen-fade {
   height: 35vh;
-  background: linear-gradient(
-      rgba()
-      rgba(77, 77, 77, 0.479),
-      rgba(77, 77, 77, 0.479) 57%,
-      rgba(163, 163, 163, 0.671) 80%,
-      white 100%
-  );
+  background: linear-gradient( 
+    to bottom,
+    rgba(255,255,255,0)65%,
+    rgba(77, 77, 77, 0.479) 77%,
+    rgba(163, 163, 163, 0.671) 85%,
+    white 100%
+    );
 }
-  .jumbotron{
+
+.jumbotron {
     background-color: transparent !important;
+    color: white;
+    text-align: center;
+    font-family:'Kaushan Script' ;
 }
 
 #entire-card {
   max-width: 60%;
+  margin-top: 15vh;
   padding-left: 70px;
 }
 

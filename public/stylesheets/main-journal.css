@@ -8,9 +8,6 @@ body {
     color: white;
 }
 
-.background{
- 
-}
 
 nav {
     display: flex;
@@ -24,7 +21,7 @@ nav {
 }
 
 .header{
-    font-family: 'Kushan Script';
+    font-family: 'Kaushan Script';
     margin-top: 50px;
     font-weight: 800;
     text-align: center;
@@ -37,24 +34,36 @@ ul a {
     color: white;
 }
 
+/* .background{
+    position: fixed; 
+    top: 0; 
+    width: 100%;
+} */
+
+.newButton{
+    margin: 30px 200px 0 200px;
+    padding: 10px 12px 10px 12px;
+    border-radius: 12px;
+    float: right;
+}
+
 .Journal{
-    /* height:260px;
-    width: 700px; */
-    background-size: cover;
-    border-radius: 12px;
+    margin: 120px 200px 200px 200px;
     position: relative;
-    margin: 30px 0 0 0;
-    padding: 50px 200px 50px 200px;
-    border-radius: 12px;
+    padding: 50px 50px 50px 50px;
+    background-clip: padding-box;
+    box-shadow: 0 0 0 8px #f8f8f8;
+    background-color: rgba(255, 255, 255, 0.20);
+    }
 }
 
 .entry{
-    margin: 25px 0 50px 0;
-    border-radius: 12px;
+    margin: 25px 0px 50px 0px;
 }
-p {
+p, .journalButtons {
     float: right;
     width: 55%;
+    
 }
 h3{
     font-size: 25px;
@@ -84,6 +93,10 @@ h3, img, {
 
 .card {
     background-color: transparent !important;
+}
+
+p {
+
 }
 
 /* .entry-header{
