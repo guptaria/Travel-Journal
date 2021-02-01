@@ -30,8 +30,8 @@ GIF of working page here:
 # Contributors 
 BySondra
 Priya 
-Themarak
-Jon
+Thammarak
+Jones
 Christian
 
 
