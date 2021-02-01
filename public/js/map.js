@@ -9,6 +9,9 @@ const userListArr = [];
 //   "latlang": (30.2701188, -97.7313156)
 // }];
 
+const newAddArr = [];
+
+
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
@@ -148,15 +151,44 @@ function renderJournal() {
 }
 
 function renderJournal2(newAddArr) {
+  console.log("newAddArr.length = " + newAddArr.length);
+
   for (var i = 0; i < newAddArr.length; ++i) {
 
-    $(`#row${i}`).html(`<td><p class="">${newAddArr[i].placeName} - ${newAddArr[i].date}
+    console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
+    console.log("newAddArr[i].date = " + newAddArr[i].date);
+    console.log("newAddArr[i].journal = " + newAddArr[i].journal);
+    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
+
+    $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
   <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
   <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
   <p class="">${newAddArr[i].journal}</p>
   </td>`);
 
   }
+
+
+}
+
+
+function loopJournal(newAddArrAfterSearch) {
+  console.log("newAddArrAfterSearch.length = " + newAddArrAfterSearch.length);
+
+
+  for (var i = 0; i < newAddArrAfterSearch.length; ++i) {
+
+    let newAddArrAfterSearchEach = newAddArrAfterSearch[i];
+
+    console.log("newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
+    console.log("newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
+    console.log("newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
+    console.log("newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
+
+    postJournal(newAddArrAfterSearchEach);
+
+  }
+
 }
 
 // To have a landing map when array is first empty
@@ -170,6 +202,99 @@ function landingMap() {
 }
 
 
+function handleSearchBtnSubmit(event) {
+  event.preventDefault;
+
+  var newAdd = {
+    // placeName: $('input').val(),
+    placeName: $('#placeForm').val(),
+    date: $("#date").val(),
+    journal: $("#journal-body").val(),
+    tripName: $("#tripName").val(),
+  };
+
+  getGeolocation(newAdd.placeName);
+  postJournal(newAdd);
+
+  newAddArr.push(newAdd);
+  renderJournal2(newAddArr);
+
+  // postJournal(newAddArr);
+
+  // $('input').val("");
+  $('#placeForm').val("");
+  $("#date").val("");
+}
+
+function postJournal(newAdd) {
+  console.log("postJournal newAdd = " + newAdd);
+  console.log("postJournal newAdd.tripName = " + newAdd.tripName);
+  console.log("postJournal newAdd.placeName = " + newAdd.placeName);
+  console.log("postJournal newAdd.date = " + newAdd.date);
+  console.log("postJournal newAdd.journal = " + newAdd.journal);
+
+  const tripName = newAdd.tripName;
+  const placeName = newAdd.placeName;
+  const date = newAdd.date;
+  const journal = newAdd.journal;
+
+  $.post("/api/journal", {
+    journalTitle: tripName,
+    location: placeName,
+    start_date: date,
+    journalEntry: journal
+  })
+    .then(function (data) {
+      // window.location.replace("/user_journal");
+      alert("Adding character...");
+    });
+}
+
+// function postJournal(newAddArrAfterSearchEach) {
+//   console.log("postJournal newAddArrAfterSearchEach = " + newAddArrAfterSearchEach);
+//   console.log("postJournal newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
+//   console.log("postJournal newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
+//   console.log("postJournal newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
+//   console.log("postJournal newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
+
+//   const tripName = newAddArrAfterSearchEach.tripName;
+//   const placeName = newAddArrAfterSearchEach.placeName;
+//   const date = newAddArrAfterSearchEach.date;
+//   const journal = newAddArrAfterSearchEach.journal;
+
+//   $.post("/api/journal", {
+//     journalTitle: tripName,
+//     location: placeName,
+//     start_date: date,
+//     journalEntry: journal
+//   })
+//     .then(function (data) {
+//       // window.location.replace("/user_journal");
+//       alert("Adding character...");
+//     });
+// }
+
+function handlePushBtnSubmit(event) {
+  event.preventDefault;
+
+  // console.log("event.data = " + event.data);
+
+  // const newAddArrAfterSearch = event.data;
+  // console.log("newAddArrAfterSearch under function handlePushBtnSubmit = " + newAddArrAfterSearch);
+  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
+  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
+
+  // loopJournal(newAddArrAfterSearch);
+
+  $('#placeForm').val("");
+  $("#date").val("");
+  $("#journal-body").val("");
+  $("#tripName").val("");
+  $(".journal_table").remove();
+  landingMap()
+
+
+}
 
 
 //////////////////////////// EXECUTION ////////////////////////////////////////
@@ -191,70 +316,40 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  const newAddArr = [];
+  // This is not working got HTML return
+  // const newAddArrAfterSearch = $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  function handleSearchBtnSubmit(event) {
-    event.preventDefault;
-
-    // if (!$('input').val().trim().trim()) {
-    //   return;
-    // }
+  // console.log("newAddArrAfterSearch after HandleSearchBtnSubmit = " + newAddArrAfterSearch);
 
 
-    // var placeName = $('input').val();
-    // $('input').val('')
-    // getGeolocation(placeName);
 
 
-    var newAdd = {
-      // name from name input
-      placeName: $('input').val(),
-      // role from role input
-      date: $("#date").val(),
-      // age from age input
-      journal: $("#journal-body").val(),
-      // points from force-points input
-    };
+  // Try Hardcode
+  // const newAddArrAfterSearch = [
+  //   {
+  //     tripName : "Austin Day Trip",
+  //     placeName : "Fremont, CA",
+  //     date : 2021-01-21,
+  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
+  //   },
+  //   {
+  //     tripName : "Austin Day Trip",
+  //     placeName : "San Jose, CA",
+  //     date : 2021-01-20,
+  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
+  //   }
+  // ];
+
+  // console.log("newAddArrAfterSearch = " + newAddArrAfterSearch);
+  // console.log("newAddArrAfterSearch[0] = " + newAddArrAfterSearch[0]);
+  // console.log("newAddArrAfterSearch[1] = " + newAddArrAfterSearch[1]);
+  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
+  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
 
 
-    console.log("newAdd.placeName = " + newAdd.placeName);
-    console.log("newAdd.date = " + newAdd.date);
-    console.log("newAdd.journal = " + newAdd.journal);
+  // $(document).on("click", "#pushBtn", newAddArrAfterSearch, handlePushBtnSubmit);
 
-
-    getGeolocation(newAdd.placeName);
-
-    newAddArr.push(newAdd);
-    renderJournal2(newAddArr);
-
-
-    $('input').val("");
-    $("#date").val("");
-    // $("#journal-body").val("");
-
-    // Need to add async await here since getGeolocation is slow
-    // const newTrip = getGeolocation(placeName);
-    // Is newTrip always an array or not
-    // if (newTrip) {
-    //   console.log("newTrip.length = " + newTrip.length);
-    //   for (var i = 0; i < newTrip.length; ++i) {
-    //     console.log("i =" + i);
-
-    //     // const newTrip = [{
-    //     //   "place": "UT Austin",
-    //     //   "lat": "30.2849185",
-    //     //   "lang": "-97.7340567"
-    //     // }];
-    //     console.log("newTrip[i] = " + newTrip[i]);
-    //     console.log("newTrip[i] = " + newTrip[i].place);
-    //     console.log("newTrip[i] = " + newTrip[i].lat);
-    //     console.log("newTrip[i] = " + newTrip[i].lang);
-
-    //     postLocations(newTrip[i].place, newTrip[i].lat, newTrip[i].lang);
-    //   }
-    // }
-  }
-
+  $(document).on("click", "#pushBtn", handlePushBtnSubmit);
 
 
 });
