@@ -3,7 +3,8 @@ module.exports = function (sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
+      allowNull: true,
     },
     journalTitle: {
       type: DataTypes.STRING,
@@ -27,8 +28,8 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     start_date: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      type: DataTypes.DATE,
+      // defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false
     },
     end_date: {
@@ -49,7 +50,7 @@ module.exports = function (sequelize, DataTypes) {
   journal.associate = function (models) {
     journal.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: true
       }
     });
   };

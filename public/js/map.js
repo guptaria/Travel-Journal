@@ -158,13 +158,34 @@ function renderJournal2(newAddArr) {
     console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
     console.log("newAddArr[i].date = " + newAddArr[i].date);
     console.log("newAddArr[i].journal = " + newAddArr[i].journal);
-    console.log("newAddArr[i].journal = " + newAddArr[i].tripName);
+    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
 
-    $(`#row${i}`).html(`<td><p class="">${newAddArr[i].placeName} - ${newAddArr[i].date}
+    $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
   <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
   <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
   <p class="">${newAddArr[i].journal}</p>
   </td>`);
+
+  }
+
+
+}
+
+
+function loopJournal(newAddArrAfterSearch) {
+  console.log("newAddArrAfterSearch.length = " + newAddArrAfterSearch.length);
+
+
+  for (var i = 0; i < newAddArrAfterSearch.length; ++i) {
+
+    let newAddArrAfterSearchEach = newAddArrAfterSearch[i];
+
+    console.log("newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
+    console.log("newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
+    console.log("newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
+    console.log("newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
+
+    postJournal(newAddArrAfterSearchEach);
 
   }
 
@@ -185,45 +206,94 @@ function handleSearchBtnSubmit(event) {
   event.preventDefault;
 
   var newAdd = {
-    placeName: $('input').val(),
+    // placeName: $('input').val(),
+    placeName: $('#placeForm').val(),
     date: $("#date").val(),
     journal: $("#journal-body").val(),
     tripName: $("#tripName").val(),
   };
 
   getGeolocation(newAdd.placeName);
+  postJournal(newAdd);
 
   newAddArr.push(newAdd);
   renderJournal2(newAddArr);
 
+  // postJournal(newAddArr);
 
-  $('input').val("");
+  // $('input').val("");
+  $('#placeForm').val("");
   $("#date").val("");
-  // $("#journal-body").val("");
-
 }
 
+function postJournal(newAdd) {
+  console.log("postJournal newAdd = " + newAdd);
+  console.log("postJournal newAdd.tripName = " + newAdd.tripName);
+  console.log("postJournal newAdd.placeName = " + newAdd.placeName);
+  console.log("postJournal newAdd.date = " + newAdd.date);
+  console.log("postJournal newAdd.journal = " + newAdd.journal);
 
-// function handlePushBtnSubmit(event) {
-//   event.preventDefault;
+  const tripName = newAdd.tripName;
+  const placeName = newAdd.placeName;
+  const date = newAdd.date;
+  const journal = newAdd.journal;
 
-//   var newAdd = {
-//     placeName: $('input').val(),
-//     date: $("#date").val(),
-//     journal: $("#journal-body").val(),
-//     tripName: $("#journal-body").val(),
-//   };
+  $.post("/api/journal", {
+    journalTitle: tripName,
+    location: placeName,
+    start_date: date,
+    journalEntry: journal
+  })
+    .then(function (data) {
+      // window.location.replace("/user_journal");
+      alert("Adding character...");
+    });
+}
 
-//   // getGeolocation(newAdd.placeName);
+// function postJournal(newAddArrAfterSearchEach) {
+//   console.log("postJournal newAddArrAfterSearchEach = " + newAddArrAfterSearchEach);
+//   console.log("postJournal newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
+//   console.log("postJournal newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
+//   console.log("postJournal newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
+//   console.log("postJournal newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
 
-//   newAddArr.push(newAdd);
-//   renderJournal2(newAddArr);
+//   const tripName = newAddArrAfterSearchEach.tripName;
+//   const placeName = newAddArrAfterSearchEach.placeName;
+//   const date = newAddArrAfterSearchEach.date;
+//   const journal = newAddArrAfterSearchEach.journal;
 
-
-//   $('input').val("");
-//   $("#date").val("");
-//   $("#journal-body").val("");
+//   $.post("/api/journal", {
+//     journalTitle: tripName,
+//     location: placeName,
+//     start_date: date,
+//     journalEntry: journal
+//   })
+//     .then(function (data) {
+//       // window.location.replace("/user_journal");
+//       alert("Adding character...");
+//     });
 // }
+
+function handlePushBtnSubmit(event) {
+  event.preventDefault;
+
+  // console.log("event.data = " + event.data);
+
+  // const newAddArrAfterSearch = event.data;
+  // console.log("newAddArrAfterSearch under function handlePushBtnSubmit = " + newAddArrAfterSearch);
+  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
+  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
+
+  // loopJournal(newAddArrAfterSearch);
+
+  $('#placeForm').val("");
+  $("#date").val("");
+  $("#journal-body").val("");
+  $("#tripName").val("");
+  $(".journal_table").remove();
+
+
+}
 
 
 //////////////////////////// EXECUTION ////////////////////////////////////////
@@ -245,7 +315,40 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  // $(document).on("click", "#pushBtn", handlePushBtnSubmit);
+  // This is not working got HTML return
+  // const newAddArrAfterSearch = $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
+
+  // console.log("newAddArrAfterSearch after HandleSearchBtnSubmit = " + newAddArrAfterSearch);
+
+
+
+
+  // Try Hardcode
+  // const newAddArrAfterSearch = [
+  //   {
+  //     tripName : "Austin Day Trip",
+  //     placeName : "Fremont, CA",
+  //     date : 2021-01-21,
+  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
+  //   },
+  //   {
+  //     tripName : "Austin Day Trip",
+  //     placeName : "San Jose, CA",
+  //     date : 2021-01-20,
+  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
+  //   }
+  // ];
+
+  // console.log("newAddArrAfterSearch = " + newAddArrAfterSearch);
+  // console.log("newAddArrAfterSearch[0] = " + newAddArrAfterSearch[0]);
+  // console.log("newAddArrAfterSearch[1] = " + newAddArrAfterSearch[1]);
+  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
+  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
+
+
+  // $(document).on("click", "#pushBtn", newAddArrAfterSearch, handlePushBtnSubmit);
+
+  $(document).on("click", "#pushBtn", handlePushBtnSubmit);
 
 
 });

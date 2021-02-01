@@ -131,6 +131,31 @@ module.exports = function(app) {
   });
 
 
+  app.post("/api/journal", function(req, res) {
+
+    console.log("req.body.journalTitle = " + req.body.journalTitle);
+    console.log("req.body.location = " + req.body.location);
+    console.log("req.body.start_date = " + req.body.start_date);
+    console.log("req.body.journalEntry = " + req.body.journalEntry);
+    
+  db.journal.create({
+    journalTitle: req.body.journalTitle,
+    location: req.body.location,
+    start_date: req.body.start_date,
+    journalEntry: req.body.journalEntry
+  })
+    .then(function(dblocations) {
+      // console.log(dblocations);
+      // res.redirect(307, "/api/login");
+      // res.json(dblocations);
+    })
+    // .catch(function(err) {
+    //   res.status(401).json(err);
+    // });
+});
+
+
+
 //    //GET  route for getting all of the yourJournal
 //   app.get("/api/journal/", function(req, res) {
 //     db.yourJournal.findAll({})
