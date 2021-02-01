@@ -1,10 +1,11 @@
 # Travel Journal
 
 Tell us about your Travels!
+Social Media Network to allow for creation of Trip Journals to share with friends! 
+
+Sign up to our site in order to create content. 
 Enter recent trips to your dashboard so that you can store memories to share with friends. 
 Add specific locations to your journal entries and images as well. 
-
-
 
 
 # Basic Layout
@@ -18,7 +19,7 @@ User Dashboard main - lists all past trips < this page only visible after loggin
 
 
 # Continous Integration
-ES Lint
+ESLint
 
 
 
@@ -27,19 +28,21 @@ ES Lint
 homeurl after deployed goes here.
 
 GIF of working page here: 
+
+
 # Contributors 
-BySondra
-Priya 
-Thammarak
-Jones
-Christian
+BySondra - https://github.com/lovejustbry
+Priya - https://github.com/guptaria 
+Thammarak - https://github.com/thammaraku 
+Jones - https://github.com/jonesliddy77
+Christian - https://github.com/Romer0-c
 
 
 # Future Developments
 Integrate user interaction that allow for modification of same trip journals. 
 
 
-# Techonogies Used
+# Technologies Used
 
 NodeJS
 Bootstrap
