@@ -3,52 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Journal</title>
 
-    <title>My Trips</title>
+
+     <!-- jQuery library -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script src="../public/js/main-journal.js"></script>
+
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="./stylesheets/main-journal.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Original+Surfer&display=swap" rel="stylesheet">
+
+    <!-- ICON LIBRARY -->
+    <script src="https://kit.fontawesome.com/f53a07ee43.js" crossorigin="anonymous"></script>
+
+   
+
 </head>
 <body>
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Welcome Users.userName! and Users.profileImage</h1>
-            <!-- <h3>...</h3> -->
+
+    <div class="background">
+        <div class="home-screen-fade">
+            <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Nav Bar -->
+            <nav>
+                <div class="navcontainer">
+                    <div class="nav-links">
+                        <ul id="nav-links-border1">
+                            <a href="Explore">| Explore |</a>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+<!--Page  Header -->
+            <div class="header">
+                <h1>Welcome to Your Travel Journal, Users.userName! (Users.profileImage)</h1>
+            </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9">
-              <div class="row">
-                <div class="col-xs-10 col-sm-8">
-                    <div class="list-group">
-                        <p class="center">Journal Entries</p>
-                        <button type="button" class="list-group-item list-group-item-action active">
-                          List of Journal Entries
-                        </button>
-                        <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                        <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                        <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                        <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
-                      </div>
-                </div>
-                <div class="col-xs-2 col-sm-4">
-                    <p>List of friends (Future Development)</p>
-                    <button type="button" class="list-group-item list-group-item-action active">
-                        Dapibus ac facilisis in
-                      </button>
-                      <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                      <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                      <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                      <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
-        <br>
 
-        <button class="center">CREATE A NEW TRIP JOURNAL</button>
-    </div>
+<!--Create Journal Button-->
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
+    <button class="newButton"><a href="./user_journal.html">Create New Journal</a></button>
+
+,<!-- Main Content-->
+
+<section class="Journal">
+
+
+    <!--Journal Entries-->
+                    <div class="entry" id="mexico-city">
+                        <h3>My Love for Mexico City</h3>
+                        <h4>Date</h4>
+                            <img src="../public/img/mexicocity.jpg">
+                            <p class="paragraph"> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. Sit esse est deserunt incididunt minim labore consectetur 
+                                                occaecat magna sit deserunt. Esse magna pariatur esse dolore. Laboris do nisi irure
+                                                do dolore est aliquip tempor eu eu do cillum fugiat.</p>
+                            <div class="journalButtons">
+                            <button class="editEntry">Edit</button>
+                            <button class="deleteEntry">Delete</button>
+                            </div>
+                    </div>
+                
+                    <div class="entry" id="thailand">
+                        <h3>Poo-ket or Fuket</h3>
+                        <h4>Date</h4>
+                        <img src="../public/img/phuket.jpg">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                             
+                             <div class="journalButtons">
+                            <button class="editEntry">Edit</button>
+                            <button class="deleteEntry">Delete</button>
+                            </div>
+                    </div>
+                    
+                    <div  class="entry" id="shanghai">
+                        <h3>A  24-Hour Layover in Shanghai</h3>
+                        <h4>Date</h4>
+                        <img src="../public/img/shanghai.jpg">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                                                <div class="journalButtons">
+                                                    <button class="editEntry">Edit</button>
+                                                    <button class="deleteEntry">Delete</button>
+                                                    </div>
+                                            </div> 
+
+                    <!-- <div  class="entry" id="Location">
+                        <div class="entry-header">
+                        <h3>Journal Entry Title<span class="date">Date</span></h3>
+                        <h4>Date</h4>
+                        <img src="..">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                        </div>
+                    </div> -->
+                    
+                </section> 
+
 </html>
