@@ -291,6 +291,7 @@ function handlePushBtnSubmit(event) {
   $("#journal-body").val("");
   $("#tripName").val("");
   $(".journal_table").remove();
+  landingMap()
 
 
 }
