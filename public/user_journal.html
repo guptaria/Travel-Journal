@@ -7,21 +7,21 @@
     <title>My Google Maps Demo</title>
 
 
-     <!-- jQuery library -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+    <!-- jQuery library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <!-- GOOGLE MAPS API NEED TO REPLACE API KEY WITH DOTENV FILE -->
+    <!-- GOOGLE MAPS API CAN NOT BE REPLACED WITH DOTENV FILE FOR FRONT END -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyaTv1sO1paK-4TSHmoyktQbCiNHiIzQA&libraries=places&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRsOs6IB-yF2-v65bR6gYpfIFft1RUM54&libraries=places&callback=initMap&v=weekly"
         defer></script>
 
     <!-- BOOTSTRAP CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="./stylesheets/map-style.css" />
 
@@ -42,7 +42,7 @@
         </div>
     </header> -->
 
-     <!--Background Photo-->
+    <!--Background Photo-->
     <!-- <div
         id="journal-photo"
         class="bg-5 text-center bg-image"
@@ -57,87 +57,135 @@
                 <h1>Welcome Users.userName! and Users.profileImage</h1>
                 <!-- <h3>...</h3> -->
             </div>
+    <div id="background">
+        <!--Welcome Jumbotron-->
+        <div class="container" style="border:solid black">
+            <h1>Welcome Users.userName! and Users.profileImage</h1>
         </div>
     </div>
 </div>
 
-    <!-- BOORSTRAP FOR FULL WIDTH -->
-    <div class="container-fluid" id="entire-card">
-        <div class="row">
-        
-            <!-- Search box on the left three parts-->
-            <div id="placeSearch" class="col-md-3 bg-light mt-3 card row-15">
-                <h4 class="mt-3">Add locations to your adventure</h4>
+        <!-- BOORSTRAP FOR FULL WIDTH -->
+        <div class="container-fluid" id="entire-card">
+            <div class="row">
 
-                <!-- Places Search -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Place Name" aria-label="Place Name">
-                    <div class="input-group-append">
-                        <button id="searchBtn" class="btn btn-outline-secondary" type="button"><i
-                                class="fas fa-search"></i></button>
+                <!-- Search box on the left three parts-->
+                <div id="" class="col-md-3 bg-light mt-3 card row-15">
+
+                    <div>
+
+                        <h5 class="mt-3">Name your Trip</h5>
+                        <!-- <div class="input-group mb-3"> -->
+                            <input type="text" class="form-control" placeholder="" id="tripName">
+                        <!-- </div> -->
+
+                        <h5 class="mt-3">Add Place</h5>
+                        <!-- Places Search -->
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="placeForm" placeholder="Input Place Name Here"
+                                aria-label="Place Name">
+                            <!-- <div class="input-group-append">
+                            <button id="searchBtn" class="btn btn-outline-secondary" type="button"><i
+                                    class="fas fa-search"></i></button>
+                        </div> -->
+                        </div>
+
+
+                        <h5 class="mt-3">Date</h5>
+                        <div class="input-group mb-3">
+                            <input type="date" class="form-control" id="date" placeholder="" aria-label="">
+                        </div>
+
+
+                        <h5 class="mt-3">Journal</h5>
+                        <div class="input-group mb-3">
+                            <form id="">
+                                <div class="form-group">
+                                    <!-- <label for="body"></label> -->
+                                    <textarea class="form-control" rows="10" cols="50"
+                                        id="journal-body">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti</textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- add search place to journal -->
+                        <div class="col-md-12 input-group mb-3">
+                            <div style=""><button id="searchBtn">Add place to Journal</button></div>
+                        </div>
+
                     </div>
+
+                    <div>
+                        <!-- <h5 class="mt-3">Name your Trip</h5>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="tripName" placeholder="" aria-label="">
+                        </div> -->
+
+                        <div class="col-md-12 input-group mb-3">
+                            <div style=""><button id="pushBtn">Complete the Journal</button></div>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <!-- List of Places Limit as five for now -->
-                <table class="table">
-                    <tbody>
-                        <tr id="row0"></tr>
-                        <tr id="row1"></tr>
-                        <tr id="row2"></tr>
-                        <tr id="row3"></tr>
-                        <tr id="row4"></tr>
-                        <!-- <tr id="row5"></tr>
-                        <tr id="row6"></tr>
-                        <tr id="row7"></tr> -->
-                    </tbody>
-                </table>
 
-                <!-- add search place to journal -->
-                <div style="float:right"><button>Add to Journal</button></div>
-            </div>
+                <!-- main content-->
+                <div class="col-md-9">
 
-            <!-- main content-->
-            <div class="col-md-9">
+                    <!-- Map and Journal Content full width-->
 
-                <!-- Map and Journal Content full width-->
-
-             <div class="col-md-12 offset-md-3"></div>  
-                <form id="journal-Title">
+                    <div class="col-md-12 offset-md-3"></div>
+                    <!-- <form id="journal-Title">
                   <div class="form-group">
                     <label for="body">Journal Entry Title: Need to pull from journals.journalEntry table</label>
                     <textarea class="form-control" rows="10" id="body"></textarea>
                   </div>
-                </form>
+                </form> -->
 
-        
-                <!-- Map -->
-                <div class="card card-md-12 mt-3 mb-4">
-                    <div id="map" class="row"></div>
-                </div> 
-                
-                 <!-- Trip Name -->
-                 <div class="-md-12 mt-3 mb-4">
+
+                    <!-- Map -->
+                    <div class="card card-md-12 mt-3 mb-4">
+                        <div id="map" class="row"></div>
+                    </div>
+
+                    <div class="card-md-12 mt-3 mb-4" style="">
+                        <table class="table">
+                            <tbody>
+                                <tr id="row0"></tr>
+                                <tr id="row1"></tr>
+                                <tr id="row2"></tr>
+                                <tr id="row3"></tr>
+                                <tr id="row4"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <!-- Trip Name -->
+                    <!-- <div class="-md-12 mt-3 mb-4">
                     <label class="ml-3"> Display input field value here after choosing save - Need to pull from journals.journalTitle table</label>
                     <div class="card-body">
                         <div class="row">
                             <div><input type="text"><input type="date"><button>Save</button></div>
                         </div>
                     </div>
-                </div>
-                <!-- Journal Details -->
-                <!-- <div class="card card-md-12 mt-3 mb-4" style="height: 300px;"> -->
+                </div> -->
+                    <!-- Journal Details -->
+                    <!-- <div class="card card-md-12 mt-3 mb-4" style="height: 300px;"> -->
                     <!-- <div class="row" id="journal_row" > -->
-                        <!-- <h3 class="ml-3">Journal Entry - Need to pull from journals.journalEntry table</h3> -->
-                        <!-- Example code from crud activity must be modified 
+                    <!-- <h3 class="ml-3">Journal Entry - Need to pull from journals.journalEntry table</h3> -->
+                    <!-- Example code from crud activity must be modified 
                         UTA-AUS-FSF-PT-10-2020-U-C/14-Full-Stack/01-Activities/12-Blog-CRUD/Solved/public/cms.html-->
-                        <div class="col-md-12 offset-md-3"></div>  
+                    <!-- <div class="col-md-12 offset-md-3"></div>  
                             <form id="journal-body">
                               <div class="form-group">
                                 <label for="body">Journal Entry: Need to pull from journals.journalEntry table</label>
                                 <textarea class="form-control" rows="10" id="body"></textarea>
                             </div>
-                            </form>
-                        <!-- <table class="table">
+                            </form> -->
+                    <!-- <table class="table">
                             <tbody>
                                 <tr id="journal_row0"></tr>
                                 <tr id="journal_row1"></tr>
@@ -146,18 +194,18 @@
                                 <tr id="journal_row4"></tr>
                             </tbody>
                         </table> -->
-                    
-                    </div>
+
                 </div>
             </div>
-            <!--Journal Entry Submit Button-->
-            <div class="col-9 mx-auto">
+        </div>
+        <!--Journal Entry Submit Button-->
+        <!-- <div class="col-9 mx-auto">
                 <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
-            </div>
-        
+            </div> -->
     </div>
-</div>
-   
+    </div>
+    </div>
+
 
     <!-- google map library -->
     <script src="./js/map.js"></script>
