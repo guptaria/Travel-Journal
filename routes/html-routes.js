@@ -32,7 +32,7 @@ module.exports = function(app) {
     //   res.redirect("/home.html");
     // }
     // res.sendFile(path.join(__dirname, "../public/log-in.html"));
-    res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
 
   //Here we've add our isAuthenticated middleware to this route.
