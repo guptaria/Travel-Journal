@@ -6,6 +6,12 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       allowNull: true,
     },
+    userEmail: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [1 - 50]
+      }
+    },
     journalTitle: {
       type: DataTypes.STRING,
       allowNull: false,
