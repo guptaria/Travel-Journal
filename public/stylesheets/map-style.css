@@ -49,4 +49,7 @@
   padding-left: 70px;
 }
 
+input:focus::placeholder {
+  color: transparent;
+}
   
