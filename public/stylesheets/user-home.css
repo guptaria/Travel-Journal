@@ -1,10 +1,3 @@
-:root {
-    --darkBlue: rgb(0, 73, 183);
-    --lightBlue: rgb(0, 221, 255);
-    --pink: rgb(247, 89, 144);
-    --yellow: rgb(255, 246, 133);
-    --red: rgb(255, 29, 88);
-}
 html,
 body,
 div,
@@ -110,11 +103,12 @@ body {
 .home-screen-fade {
     height: 100vh;
     background: linear-gradient(
-      rgba(255, 255, 255, 0.267),
+        rgba(255, 255, 255, 0.267),
         rgba(77, 77, 77, 0) 30%,
         rgba(77, 77, 77, 0) 50%,
-        rgba(163, 163, 163, 0.342) 80%,
-        rgba(255, 255, 255, 0.287) 100%
+        rgba(255, 255, 255, 0.226) 80%,
+        rgba(251, 251, 251, 0.548) 90%,
+        rgba(255, 255, 255, 0.856) 100%
     );
     z-index: -2;
 }
@@ -171,7 +165,7 @@ a:-webkit-any-link {
 /* ========================================================== */
 /* Map */
 .map-container {
-    height: 90vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,6 +181,283 @@ a:-webkit-any-link {
 .cesium-credit-textContainer:before {
     display: none;
 }
-.cesium-credit-text{
-  display: none;
+.cesium-credit-text {
+    display: none;
+}
+/* Mouse Icon */
+.move {
+  background: rgba(0, 0, 0, 0);
+  width: 100%;
+}
+
+.mouse { 
+     display: flex;
+  justify-content: center;
+  align-items: center;
+    width: 100%;
+}
+
+.mouse-icon {
+    width: 25px;
+    height: 45px;
+    border: 2px solid white; /*you can change 'white' to a hex color*/
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+}
+.mouse-wheel {
+    height: 6px;
+    margin: 2px auto 0;
+    display: block;
+    width: 3px;
+    background-color: white; /*you can change 'white' to a hex color*/
+    border-radius: 50%;
+    -webkit-animation: 1.6s ease infinite wheel-up-down;
+    -moz-animation: 1.6s ease infinite wheel-up-down;
+    animation: 1.6s ease infinite wheel-up-down;
+}
+@-webkit-keyframes wheel-up-down {
+    0% {
+        margin-top: 2px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        margin-top: 20px;
+        opacity: 0;
+    }
+}
+@-moz-keyframes wheel-up-down {
+    0% {
+        margin-top: 2px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        margin-top: 20px;
+        opacity: 0;
+    }
+}
+@keyframes wheel-up-down {
+    0% {
+        margin-top: 2px;
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        margin-top: 20px;
+        opacity: 0;
+    }
+}
+/* ========================================================== */
+/* Explore */
+.container1 {
+    height: 50vh;
+    padding-top: 10vh;
+    background: rgb(222.5, 222.5, 222.5);
+    background: linear-gradient(
+        rgba(218, 218, 218, 0.856) 80%,
+        rgb(235, 235, 235) 100%
+    );
+}
+.container2 {
+    height: 50vh;
+    background: linear-gradient(
+        rgb(235, 235, 235) 80%,
+        rgb(255, 255, 255) 100%
+    );
+}
+.container3 {
+    height: 50vh;
+    background: linear-gradient(rgb(255, 255, 255) 80%, white 100%);
+}
+.explore1,
+.explore2,
+.explore3 {
+    padding: 50px 0;
+    display: flex;
+}
+.explore1 img,
+.explore2 img,
+.explore3 img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.col-4 {
+    width: 34%;
+    padding: 30px 70px;
+}
+
+.col-4 h1 {
+    font: 2rem;
+    border-bottom: 3px solid rgb(29, 29, 29);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.col-4 p {
+    font-size: 1rem;
+    line-height: 24px;
+    font-weight: 500;
+    opacity: 0.8;
+}
+.col-4 a {
+    display: inline-block;
+    padding: 12px 5px;
+    background-color: thistle;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+.col-8 {
+    width: 55%;
+}
+.glide__arrows {
+    width: 100%;
+    height: 10vh;
+    position: absolute;
+    top: 115px;
+}
+.glide__arrows .glide__arrow {
+    background-color: rgba(0, 0, 0, 0.116);
+    border: none;
+    width: 10%;
+    height: 272px;
+    line-height: 35px;
+    color: white;
+    font-size: 2rem;
+    outline: none;
+    padding: 0;
+}
+.glide__arrow--left {
+    left: 10px;
+}
+.glide__arrow--right {
+    right: 10px;
+}
+
+.glide__slide {
+    transform: scale(0.9);
+    filter: brightness(50%);
+    transition: all ease 0.5s;
+}
+.glide__slide.glide__slide--active {
+    transform: scale(1);
+    filter: brightness(100%);
+}
+
+/* ========================================================== */
+/* Footer */
+footer {
+    background: rgb(29, 29, 29);
+    width: 100%;
+    height: 47vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Social Media Icons Container*/
+.icons-container {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 10vh;
+    padding-top: 50px;
+}
+.icons {
+    margin: 5px;
+}
+.icons i {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+/* All Icons */
+.fa-facebook {
+    background: rgb(65, 131, 255);
+    color: white;
+}
+.fa-twitter {
+    background: rgb(102, 181, 255);
+    color: white;
+}
+.fa-instagram {
+    color: white;
+    background-image: url(../img/insta-background.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fa-youtube {
+    background: rgb(255, 65, 65);
+    color: white;
+}
+.fa-linkedin-in {
+    background: rgb(62, 159, 238);
+    color: white;
+}
+.fa-apple {
+    color: rgb(98, 98, 98);
+}
+.fa-google {
+    color: rgb(98, 98, 98);
+}
+.fa-js {
+    color: rgb(98, 98, 98);
+}
+.fa-github {
+    color: rgb(98, 98, 98);
+}
+/* Footer Info */
+.footer-info {
+    width: 65%;
+}
+.footer-info ul {
+    display: flex;
+    justify-content: space-evenly;
+    justify-self: center;
+    align-items: center;
+    height: 10vh;
+    list-style-type: none;
+    color: rgb(98, 98, 98);
+}
+.footer-info ul a {
+    color: rgb(98, 98, 98);
+}
+.support-title {
+    color: rgb(98, 98, 98);
+    font-size: 13px;
+    padding-top: 10px;
+}
+.support-container {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 10vh;
+}
+.support-container i {
+    font-size: 17px;
+}
+.copy-write {
+    color: rgb(98, 98, 98);
+    font-size: 15px;
 }
