@@ -36,33 +36,43 @@ module.exports = function (sequelize, DataTypes) {
       type: 'TIMESTAMP',
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false
-      }
+    }
 
   },
-  {
-    createdAt: false,
-    updatedAt: false,
-    timestamps: false
+    {
+      createdAt: false,
+      updatedAt: false,
+      timestamps: false
 
-  });
+    });
 
   // Relationship between user and journal, one user can have multiple journals
   journal.associate = function (models) {
-    journal.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: true
-      }
-    });
+    journal.belongsTo(models.User,
+      // { as: 'User'}, 
+      {
+        foreignKey:{allowNull:false}
+        
+      });
   };
 
   // Relationship between location and journal, one location can have multiple journals
   // journal.associate = function (models) {
-  //   journal.belongsTo(models.location, {
+  //   journal.belongsTo(models.userLocation, {
   //     foreignKey: {
   //       allowNull: false
   //     }
+
   //   });
   // };
+
+  //  Relationship between location and journal, one journal can have multiple locations
+  //   journal.associate = function(models) {
+  //     journal.hasMany(models.location, {
+  //     onDelete: "cascade"
+  //   });
+  // };
+
 
   return journal;
 };

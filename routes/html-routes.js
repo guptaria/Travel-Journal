@@ -12,8 +12,8 @@ module.exports = function(app) {
       res.redirect("/home");
     }
     // res.sendFile(path.join(__dirname, "../public/sign-up.html"));
-    // res.sendFile(path.join(__dirname, "../public/google-signup.html"));
-    res.sendFile(path.join(__dirname, "../public/user_journal.html"));
+    res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+    // res.sendFile(path.join(__dirname, "../public/user_journal.html"));
   });
 
   app.get("/login", function(req, res) {
@@ -31,13 +31,11 @@ module.exports = function(app) {
   //   res.sendFile(path.join(__dirname, "../public/members.html"));
   // });
 
-  // Route to explore page
-  app.get("/explore", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/explore.html"));
-  });
-  // Routes to user page
-  app.get("/home", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
-  });
-
+  // app.get('/logout', (req, res) => {
+  //   req.session = null;
+  //   req.logout();
+  //   res.redirect('/');
+  // });
 };
+
+

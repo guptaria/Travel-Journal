@@ -1,5 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
-    var location = sequelize.define("location", {
+    var userLocation = sequelize.define("userLocation", {
+      
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -61,31 +62,42 @@ module.exports = function(sequelize, DataTypes) {
   
     });
 
-    //Many to Many realationship between user and location
-    location.associate = (models) => {
-      location.belongsToMany(models.User, {
-        through: "merge",
-        as: "locations",
-        foreignKey: "location_id",
-      });
-    };
-
-    // location.associate = function (models) {
-    //   location.belongsTo(models.User, {
-    //     foreignKey: {
-    //       allowNull: false
-    //     }
+    // Many to Many realationship between user and location
+    // location.associate = (models) => {
+    //   location.belongsToMany(models.User, {
+    //     through: "merge",
+    //     as: "locations",
+    //     foreignKey: "location_id",
     //   });
     // };
 
+    ////Creating one to many relationship with the user table. Basically one user can have more than one location in the database
+    userLocation.associate = function (models) {
+      userLocation.belongsTo(models.User, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    };
+
     // Relationship between location and journal, one location can have multiple journals
-  //   location.associate = function(models) {
-  //     location.hasMany(models.journal, {
-  //     onDelete: "cascade"
+    userLocation.associate = function(models) {
+      userLocation.hasMany(models.journal, {
+        onDelete: "cascade"
+     });
+   };
+
+ 
+
+  // Relationship between location and journal, one journal can have multiple locations
+  // location.associate = function (models) {
+  //   location.belongsTo(models.journal, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
   //   });
   // };
-
-    return location;
+    return userLocation;
   };
 
 

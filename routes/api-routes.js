@@ -115,7 +115,7 @@ module.exports = function(app) {
       console.log("req.body.latitude = " + req.body.latitude);
       console.log("req.body.longitude = " + req.body.longitude);
       
-    db.location.create({
+    db.userLocation.create({
       place: req.body.place,
       latitude: req.body.latitude,
       longitude: req.body.longitude
@@ -154,6 +154,17 @@ module.exports = function(app) {
     // });
 });
 
+
+// GET route for getting all of the userJournalPage
+app.get("/api/userJournalPage:id", function(req, res) {
+  // findAll returns all entries for a table when used with no options
+  db.User.findAll({
+      where: {id: req.params.id}
+  }).then(function(dbUserJournal) {
+    // We have access to the todos as an argument inside of the callback function
+    res.json(dbUserJournal);
+  });
+});
 
 
 //    //GET  route for getting all of the yourJournal
