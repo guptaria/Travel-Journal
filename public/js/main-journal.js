@@ -27,13 +27,17 @@
 
 // $(document).ready(function() {
 // $('#mexico-city').on('click', function() {
+
 //     $("p").toggleClass();
 //     });
 
 // $('.entry').on('click', function() {
 //         $("p").toggleClass('paragraph',true);
+
+
 //     });
 // });
+
 
 
 
@@ -55,3 +59,4 @@ $(document).ready(function(){
     //      $('p').toggle();
     //  });
    });
+
