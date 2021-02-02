@@ -43,9 +43,11 @@ module.exports = function(app) {
         email: userEmail
       }
     }).then(function(dbUser) {
+      console.log(dbUser);
       // If user is already exists then we should just add them to session and redirect to homepage
       if (dbUser) {
         res.cookie.user = {
+          UserId: dbUser.id,
           email: dbUser.email,
           userName: dbUser.userName,
           profileImage: dbUser.profileImage
@@ -55,6 +57,7 @@ module.exports = function(app) {
   
       // No user found with the given email, we need to create new user in our database
       db.User.create({
+        UserId: req.body.id,
         email: req.body.email,
         userName: req.body.userName,
         profileImage: req.body.profileImage,
@@ -62,11 +65,13 @@ module.exports = function(app) {
       })
       .then(function(dbUser) {
         res.cookie.user = {
+          UserId: dbUser.id,
           email: dbUser.email,
           userName: dbUser.userName,
           profileImage: dbUser.profileImage
         };
         res.cookie.user = {
+          UserId: dbUser.id,
           email: dbUser.email,
           userName: dbUser.userName,
           profileImage: dbUser.profileImage
@@ -98,6 +103,7 @@ module.exports = function(app) {
 
     if(res.cookie.user) {
       return res.json({
+        UserId: res.cookie.user.id,
         email: res.cookie.user.email,
         userName: res.cookie.user.userName,
         profileImage: res.cookie.user.profileImage
@@ -156,10 +162,10 @@ module.exports = function(app) {
 
 
 // GET route for getting all of the userJournalPage
-app.get("/api/userJournalPage:id", function(req, res) {
+app.get("/api/userJournalPage/:UserId", function(req, res) {
   // findAll returns all entries for a table when used with no options
-  db.User.findAll({
-      where: {id: req.params.id}
+  db.journal.findAll({
+      where: {UserId: req.params.UserId}
   }).then(function(dbUserJournal) {
     // We have access to the todos as an argument inside of the callback function
     res.json(dbUserJournal);
