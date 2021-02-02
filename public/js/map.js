@@ -3,13 +3,15 @@
 let map;
 let service;
 let infowindow;
-const userListArr = [];
+
+let userListArr = [];
 // var userListArr = [{
 //   "place": "franklin bbq",
 //   "latlang": (30.2701188, -97.7313156)
 // }];
 
-const newAddArr = [];
+let newAddArr = [];
+let geoLocationObj = {};
 
 
 function initMap() {
@@ -61,11 +63,12 @@ function initMap() {
 
 }
 
+// POST Request to Location Table
 function postLocation(geoLocationObj) {
   console.log("postLocations = " + geoLocationObj);
-  console.log("postLocations = " + geoLocationObj.place);
-  console.log("postLocations = " + geoLocationObj.lat);
-  console.log("postLocations = " + geoLocationObj.lang);
+  console.log("postLocations.place = " + geoLocationObj.place);
+  console.log("postLocations.lat = " + geoLocationObj.lat);
+  console.log("postLocations.lang = " + geoLocationObj.lang);
 
   const place = geoLocationObj.place;
   const latitude = geoLocationObj.lat;
@@ -78,7 +81,6 @@ function postLocation(geoLocationObj) {
   })
     .then(function (data) {
       // window.location.replace("/user_journal");
-      alert("Adding character...");
     });
 }
 
@@ -131,11 +133,13 @@ function collectUserSearch(geoLocationObj) {
   // Render new userListArr
   // renderJournal(userListArr);
   initMap(userListArr);
+  console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
   postLocation(geoLocationObj);
 
 }
 
 function renderJournal() {
+  console.log("userListArr.length under renderJournal = " + userListArr.length);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
       $(`#row${i}`).html(`<td><p class="">${userListArr[i].place} ${userListArr[i].date}
@@ -150,49 +154,18 @@ function renderJournal() {
   }
 }
 
-function renderJournal2(newAddArr) {
-  console.log("newAddArr.length = " + newAddArr.length);
 
-  for (var i = 0; i < newAddArr.length; ++i) {
-
-    console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
-    console.log("newAddArr[i].date = " + newAddArr[i].date);
-    console.log("newAddArr[i].journal = " + newAddArr[i].journal);
-    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
-
-    $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
-  <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-  <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
-  <p class="">${newAddArr[i].journal}</p>
-  </td>`);
-
-  }
-
-
-}
-
-
-function loopJournal(newAddArrAfterSearch) {
-  console.log("newAddArrAfterSearch.length = " + newAddArrAfterSearch.length);
-
-
-  for (var i = 0; i < newAddArrAfterSearch.length; ++i) {
-
-    let newAddArrAfterSearchEach = newAddArrAfterSearch[i];
-
-    console.log("newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
-    console.log("newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
-    console.log("newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
-    console.log("newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
-
-    postJournal(newAddArrAfterSearchEach);
-
-  }
-
-}
 
 // To have a landing map when array is first empty
 function landingMap() {
+
+  let newAddArr = [];
+  const userListArr = [];
+  // const newAdd = {};
+  const geoLocationObj = {};
+  console.log("newAddArr.length under landingMap = " + newAddArr.length);
+
+
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
     // landing page center on united states
@@ -204,6 +177,8 @@ function landingMap() {
 
 function handleSearchBtnSubmit(event) {
   event.preventDefault;
+
+  console.log("newAddArr.length under Search Button = " + newAddArr.length);
 
   var newAdd = {
     // placeName: $('input').val(),
@@ -219,20 +194,33 @@ function handleSearchBtnSubmit(event) {
   newAddArr.push(newAdd);
   renderJournal2(newAddArr);
 
-  // postJournal(newAddArr);
-
-  // $('input').val("");
   $('#placeForm').val("");
   $("#date").val("");
+  $("#journal-body").val("");
+
 }
 
-function postJournal(newAdd) {
-  console.log("postJournal newAdd = " + newAdd);
-  console.log("postJournal newAdd.tripName = " + newAdd.tripName);
-  console.log("postJournal newAdd.placeName = " + newAdd.placeName);
-  console.log("postJournal newAdd.date = " + newAdd.date);
-  console.log("postJournal newAdd.journal = " + newAdd.journal);
+// Render Journal from the Array
+function renderJournal2(newAddArr) {
+  console.log("newAddArr.length under renderJournal2 = " + newAddArr.length);
 
+  for (var i = 0; i < newAddArr.length; ++i) {
+    console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
+    console.log("newAddArr[i].date = " + newAddArr[i].date);
+    console.log("newAddArr[i].journal = " + newAddArr[i].journal);
+    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
+
+    $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
+  <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
+  <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
+  <p class="">${newAddArr[i].journal}</p>
+  </td>`);
+  }
+
+}
+
+// POST Request to database
+function postJournal(newAdd) {
   const tripName = newAdd.tripName;
   const placeName = newAdd.placeName;
   const date = newAdd.date;
@@ -246,53 +234,27 @@ function postJournal(newAdd) {
   })
     .then(function (data) {
       // window.location.replace("/user_journal");
-      alert("Adding character...");
     });
 }
 
-// function postJournal(newAddArrAfterSearchEach) {
-//   console.log("postJournal newAddArrAfterSearchEach = " + newAddArrAfterSearchEach);
-//   console.log("postJournal newAddArrAfterSearchEach.tripName = " + newAddArrAfterSearchEach.tripName);
-//   console.log("postJournal newAddArrAfterSearchEach.placeName = " + newAddArrAfterSearchEach.placeName);
-//   console.log("postJournal newAddArrAfterSearchEach.date = " + newAddArrAfterSearchEach.date);
-//   console.log("postJournal newAddArrAfterSearchEach.journal = " + newAddArrAfterSearchEach.journal);
-
-//   const tripName = newAddArrAfterSearchEach.tripName;
-//   const placeName = newAddArrAfterSearchEach.placeName;
-//   const date = newAddArrAfterSearchEach.date;
-//   const journal = newAddArrAfterSearchEach.journal;
-
-//   $.post("/api/journal", {
-//     journalTitle: tripName,
-//     location: placeName,
-//     start_date: date,
-//     journalEntry: journal
-//   })
-//     .then(function (data) {
-//       // window.location.replace("/user_journal");
-//       alert("Adding character...");
-//     });
-// }
 
 function handlePushBtnSubmit(event) {
   event.preventDefault;
-
-  // console.log("event.data = " + event.data);
-
-  // const newAddArrAfterSearch = event.data;
-  // console.log("newAddArrAfterSearch under function handlePushBtnSubmit = " + newAddArrAfterSearch);
-  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
-  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
-
-  // loopJournal(newAddArrAfterSearch);
 
   $('#placeForm').val("");
   $("#date").val("");
   $("#journal-body").val("");
   $("#tripName").val("");
   $(".journal_table").remove();
-  landingMap()
+  
 
+  // Clear out array on Map and Journal
+  newAddArr = [];
+  userListArr = [];
+  geoLocationObj = {};
+
+  // init map to the default location
+  landingMap()
 
 }
 
@@ -316,39 +278,9 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  // This is not working got HTML return
-  // const newAddArrAfterSearch = $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
+  console.log("after serachButton newAddArr.length = " + newAddArr.length);
 
-  // console.log("newAddArrAfterSearch after HandleSearchBtnSubmit = " + newAddArrAfterSearch);
-
-
-
-
-  // Try Hardcode
-  // const newAddArrAfterSearch = [
-  //   {
-  //     tripName : "Austin Day Trip",
-  //     placeName : "Fremont, CA",
-  //     date : 2021-01-21,
-  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
-  //   },
-  //   {
-  //     tripName : "Austin Day Trip",
-  //     placeName : "San Jose, CA",
-  //     date : 2021-01-20,
-  //     journal : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, quibusdam. Repudiandae, nulla nemo nisi molestias commodi ipsum cum dolores quaerat modi totam obcaecati assumenda necessitatibus veniam quibusdam odio accusantium minus. Ipsa suscipit corrupti"
-  //   }
-  // ];
-
-  // console.log("newAddArrAfterSearch = " + newAddArrAfterSearch);
-  // console.log("newAddArrAfterSearch[0] = " + newAddArrAfterSearch[0]);
-  // console.log("newAddArrAfterSearch[1] = " + newAddArrAfterSearch[1]);
-  // console.log("newAddArrAfterSearch[0].placeName = " + newAddArrAfterSearch[0].placeName);
-  // console.log("newAddArrAfterSearch[1].placeName = " + newAddArrAfterSearch[1].placeName);
-
-
-  // $(document).on("click", "#pushBtn", newAddArrAfterSearch, handlePushBtnSubmit);
-
+  // When user click to finish a journal
   $(document).on("click", "#pushBtn", handlePushBtnSubmit);
 
 
