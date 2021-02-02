@@ -133,6 +133,7 @@ function collectUserSearch(geoLocationObj) {
   // Render new userListArr
   // renderJournal(userListArr);
   initMap(userListArr);
+  console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
   postLocation(geoLocationObj);
 
 }
@@ -160,7 +161,7 @@ function landingMap() {
 
   let newAddArr = [];
   const userListArr = [];
-  const newAdd = {};
+  // const newAdd = {};
   const geoLocationObj = {};
   console.log("newAddArr.length under landingMap = " + newAddArr.length);
 
@@ -220,12 +221,6 @@ function renderJournal2(newAddArr) {
 
 // POST Request to database
 function postJournal(newAdd) {
-  // console.log("postJournal newAdd = " + newAdd);
-  // console.log("postJournal newAdd.tripName = " + newAdd.tripName);
-  // console.log("postJournal newAdd.placeName = " + newAdd.placeName);
-  // console.log("postJournal newAdd.date = " + newAdd.date);
-  // console.log("postJournal newAdd.journal = " + newAdd.journal);
-
   const tripName = newAdd.tripName;
   const placeName = newAdd.placeName;
   const date = newAdd.date;
@@ -246,28 +241,19 @@ function postJournal(newAdd) {
 function handlePushBtnSubmit(event) {
   event.preventDefault;
 
-  console.log("newAddArr.length under PushBtn before cleared = " + newAddArr.length);
-  newAddArr = [];
-  console.log("newAddArr.length under PushBtn after cleared = " + newAddArr.length);
-
-
-
-
-
   $('#placeForm').val("");
   $("#date").val("");
   $("#journal-body").val("");
   $("#tripName").val("");
   $(".journal_table").remove();
-  // let newAddArr = [];
   
+
+  // Clear out array on Map and Journal
+  newAddArr = [];
   userListArr = [];
-  // const newAdd = {};
-  // console.log("geoLocationObj under PushBtn before cleared = " + geoLocationObj);
   geoLocationObj = {};
-  console.log("geoLocationObj under PushBtn after cleared = " + geoLocationObj);
 
-
+  // init map to the default location
   landingMap()
 
 }
