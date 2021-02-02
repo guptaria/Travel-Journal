@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
+
     console.log(req.user);
     if (req.user) {
       res.redirect("/home");
@@ -20,6 +21,7 @@ module.exports = function(app) {
   app.get("/login", function(req, res) {
     // If the user already has an account send them to the members page
     console.log(req.user);
+
     if (req.user) {
       res.redirect("/home");
     }
@@ -27,11 +29,24 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/google-login.html"));
   });
 
+  app.get("/home", function(req, res) {
+    // If the user already has an account send them to the google-login page
+   
+    // res.sendFile(path.join(__dirname, "../public/log-in.html"));
+    res.sendFile(path.join(__dirname, "../public/user-home.html"));
+  });
+  app.get("/journal", function(req, res) {
+    // If the user already has an account send them to the google-login page
+   
+    // res.sendFile(path.join(__dirname, "../public/log-in.html"));
+    res.sendFile(path.join(__dirname, "../public/user-journal.html"));
+  });
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   // app.get("/members", isAuthenticated, function(req, res) {
   //   res.sendFile(path.join(__dirname, "../public/members.html"));
   // });
+
 
   // Route to explore page
   app.get("/explore", function(req, res) {
@@ -45,3 +60,5 @@ module.exports = function(app) {
   });
 
 };
+
+
