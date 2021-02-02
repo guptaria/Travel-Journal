@@ -4,6 +4,7 @@ let map;
 let service;
 let infowindow;
 
+
 let userListArr = [];
 // var userListArr = [{
 //   "place": "franklin bbq",
@@ -12,6 +13,7 @@ let userListArr = [];
 
 let newAddArr = [];
 let geoLocationObj = {};
+let memberEmail;
 
 
 function initMap() {
@@ -178,10 +180,13 @@ function landingMap() {
 function handleSearchBtnSubmit(event) {
   event.preventDefault;
 
-  console.log("newAddArr.length under Search Button = " + newAddArr.length);
+
+  console.log("under handleSearchBtnSubmit memberEmail = " + memberEmail);
+  // console.log("newAddArr.length under Search Button = " + newAddArr.length);
 
   var newAdd = {
     // placeName: $('input').val(),
+    userEmail: memberEmail,
     placeName: $('#placeForm').val(),
     date: $("#date").val(),
     journal: $("#journal-body").val(),
@@ -221,12 +226,14 @@ function renderJournal2(newAddArr) {
 
 // POST Request to database
 function postJournal(newAdd) {
+  const userEmail = newAdd.userEmail;
   const tripName = newAdd.tripName;
   const placeName = newAdd.placeName;
   const date = newAdd.date;
   const journal = newAdd.journal;
 
   $.post("/api/journal", {
+    userEmail: userEmail,
     journalTitle: tripName,
     location: placeName,
     start_date: date,
@@ -234,6 +241,7 @@ function postJournal(newAdd) {
   })
     .then(function (data) {
       // window.location.replace("/user_journal");
+      alert("Adding journal...");
     });
 }
 
@@ -262,6 +270,13 @@ function handlePushBtnSubmit(event) {
 //////////////////////////// EXECUTION ////////////////////////////////////////
 
 $(document).ready(function () {
+
+
+  $.get("/api/user_data").then(data => {
+    $(".member-name").text(data.email);
+    memberEmail = data.email;
+    console.log(memberEmail);
+  });
 
   // Render user journal list
   renderJournal();
