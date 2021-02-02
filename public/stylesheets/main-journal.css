@@ -34,17 +34,15 @@ ul a {
     color: white;
 }
 
-/* .background{
-    position: fixed; 
-    top: 0; 
-    width: 100%;
-} */
-
 .newButton{
     margin: 30px 200px 0 200px;
     padding: 10px 12px 10px 12px;
-    border-radius: 12px;
+    border-radius: 4px;
+    border: none;
     float: right;
+    background-color: yellow;
+    color: white !important;
+    
 }
 
 .Journal{
@@ -57,9 +55,7 @@ ul a {
     }
 }
 
-.entry{
-    margin: 25px 0px 50px 0px;
-}
+
 p, .journalButtons {
     float: right;
     width: 55%;
@@ -75,11 +71,12 @@ h4{
 h3, h4 {
     /* float: left; */
     /* padding-right: 550px; */
-    width:50%;
+    width:100%;
 }
 
 img{
     height: 180px;
+    padding-bottom: 20px;
 }
 
 .date{
@@ -87,8 +84,9 @@ img{
 }
 
 h3, img, {
-    width: 51%;
+    /* width: 51%; */
     margin: 0;
+    position:  center;
 }
 
 .card {
@@ -96,25 +94,12 @@ h3, img, {
 }
 
 p {
-
+   
 }
+
+
 
 /* .entry-header{
     width: 50%
     max-width: 500px;
-} */
-
-
-/* .background {
-    background-image: url(../img/old-maps.jpg);
-    background-size: cover; 
-    margin: 0 auto;
-    padding: 0px;
-    max-width: 100%; 
-    height: 100vh;
-    max-height: 100%;
-    background-position: center center;
-    background-repeat: repeat-x;
-    background-attachment: fixed;
-    position: sticky;
 } */
