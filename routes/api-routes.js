@@ -139,6 +139,7 @@ module.exports = function(app) {
     console.log("req.body.journalEntry = " + req.body.journalEntry);
     
   db.journal.create({
+    userEmail: req.body.userEmail,
     journalTitle: req.body.journalTitle,
     location: req.body.location,
     start_date: req.body.start_date,

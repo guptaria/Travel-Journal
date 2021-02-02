@@ -8,17 +8,20 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
-    // if (req.user) {
-    //   res.redirect("/home");
-    // }
+
     console.log(req.user);
+    if (req.user) {
+      res.redirect("/home");
+    }
     // res.sendFile(path.join(__dirname, "../public/sign-up.html"));
-    // res.sendFile(path.join(__dirname, "../public/google-signup.html"));
-    res.sendFile(path.join(__dirname, "../public/home.html"));
+    res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+    // res.sendFile(path.join(__dirname, "../public/user_journal.html"));
   });
 
   app.get("/login", function(req, res) {
-    // If the user already has an account send them to the google-login page
+    // If the user already has an account send them to the members page
+    console.log(req.user);
+
     if (req.user) {
       res.redirect("/home");
     }
@@ -44,11 +47,18 @@ module.exports = function(app) {
   //   res.sendFile(path.join(__dirname, "../public/members.html"));
   // });
 
-  // app.get('/logout', (req, res) => {
-  //   req.session = null;
-  //   req.logout();
-  //   res.redirect('/');
-  // });
+
+  // Route to explore page
+  app.get("/explore", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/explore.html"));
+  });
+  // Routes to user page
+  app.get("/home", function(req, res) {
+    // res.sendFile(path.join(__dirname, "../public/home.html"));
+    res.sendFile(path.join(__dirname, "../public/user_journal.html"));
+
+  });
+
 };
 
 
