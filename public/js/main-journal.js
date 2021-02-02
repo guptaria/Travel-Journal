@@ -1,14 +1,39 @@
+// var UserId = document.cookie;
+//   console.log(UserId);
 
+$(document).ready(function () {
+  var h3 = $("<h3>");
+  var h4 = $("<h4>");
+  var img = $("<img>");
+  var paragraph = $(".paragraph");
 
-
-// $(document).ready(function() {
-// $('#mexico-city').on('click', function() {
-//     $(this).toggleClass('.paragraph'.hide());
-//     });
-// });
-
-
-
+  var UserId = "";
+  // Gets post data for a post if we're editing
+  function getJournalData(UserId) {
+    $.get("/api/userJournalPage/" + UserId, function (data) {
+      console.log(data);
+      if (data) {
+        // If this post exists, prefill our cms forms with its data
+        h3.val(data.journalTitle);
+        paragraph.val(data.journalEntry);
+        // postCategorySelect.val(data.location);
+        h4.val(data.start_date);
+        // If we have a post with this id, set a flag for us to know to update the post
+        // when we hit submit
+                // updating = true;
+      }
+    });
+  }
+ 
+    $.get("/api/user_data", function (data) {
+      console.log(data);
+      // make sure you are grabbing the correct id from the console log above
+      UserId = data.UserId;
+      // now run the call with the userId
+      getJournalData(UserId);
+    });
+  
+});
 
 
 // make ajax call to the api routes that grabs where userid=1, when they give back response in json obj to the main journal page
@@ -26,60 +51,6 @@
             </div>
     </div> */
 
-$(document).ready(function() {
-    // Getting a reference to the input field where user adds a new todo
-//     var $h3 = $("<h3>");
-//     var $h4 = $("<h4>");
-//     var $img = $("<img>");
-//     var $paragraph = $(".paragraph");
-   
-var UserId = document.cookie;
-console.log(UserId);
-
-//     // Our initial todos array
-//   var todos = [];
-
-//   // Getting todos from database when page loads
-//   getTodos();
-
- 
-
-// Gets post data for a post if we're editing
-  function getJournalData(UserId) {
-    $.get("/api/userJournalPage/" + UserId, function(data) {
-        console.log(data);
-      if (data) {
-        // If this post exists, prefill our cms forms with its data
-        // journal.val(data.journalTitle);
-        // bodyInput.val(data.journalEntry);
-        // postCategorySelect.val(data.location);
-        // postCategorySelect.val(data.start_date);
-    
-        
-        // If we have a post with this id, set a flag for us to know to update the post
-        // when we hit submit
-//         updating = true;
-      }
-    });
-  }
-
-  function getUserData(){
-  app.get("/api/user_data", function(data) {
-    console.log(data);
-
-    UserId.val(data.UserId);
-    // bodyInput.val(data.journalEntry);
-    // postCategorySelect.val(data.location);
-    // postCategorySelect.val(data.start_date);
-      });
-    }
+  // Getting a reference to the input field where user adds a new todo
+  //   
   
-
-    // The user is not logged in, send back an empty object
-    res.json({});
-  });
-}
-getJournalData(UserId);
-});
-
-
