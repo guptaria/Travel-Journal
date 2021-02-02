@@ -1,84 +1,93 @@
 
 // Initialize and add the map
-
-//   const userLocation = { lat: userLat, lng: userLong };
-// const userLocation = { lat: userLat, lng: userLong };
-
 let map;
 let service;
 let infowindow;
-// var userListArr = [];
-// var userListObj = [{
+
+let userListArr = [];
+// var userListArr = [{
 //   "place": "franklin bbq",
 //   "latlang": (30.2701188, -97.7313156)
 // }];
 
-const userListArr = [];
-// const userListArr = [
-//   ["Texas State Capitol", 30.2747, -97.7404],
-//   ["Barton Spring Pool", 30.264, -97.771],
-//   ["Frankin BBQ", 30.2701, -97.7313],
-//   ["The Oasis on Lake Travis", 30.4057, -97.8741]
-// ];
+let newAddArr = [];
+let geoLocationObj = {};
+
 
 function initMap() {
-  console.log("userListArr = " + userListArr);
-  // user location input has to be in this format: arrays of arrays
-  // const locations = [
-  //   ["Texas State Capitol", 30.2747, -97.7404],
-  //   ["Barton Spring Pool", 30.264, -97.771],
-  //   ["Frankin BBQ", 30.2701, -97.7313],
-  //   ["The Oasis on Lake Travis", 30.4057, -97.8741]
-  // ];
-
-  // Always center the first location
-  // const userLocation1LaLong = new google.maps.LatLng(
-  //   userListArr[0][1],
-  //   userListArr[0][2]
-  // );
-
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
     // center: { lat: -25.344, lng: 131.036 },
-    center: new google.maps.LatLng(37.0902, -95.7129)
-    // center: userLocation1LaLong
+    // center: new google.maps.LatLng(37.0902, -95.7129)
   });
 
   // Drop pins on all locations
   const latlngbounds = new google.maps.LatLngBounds();
-  for (i = 0; i < userListArr.length; i++) {
-    // const userLocation1LaLong = new google.maps.LatLng(locations[0][1], locations[0][2]);
+
+  if (userListArr.length === 1) {
     const markerLocation = new google.maps.LatLng(
-      userListArr[i][1],
-      userListArr[i][2]
+      userListArr[0].lat,
+      userListArr[0].lang
     );
 
-    // eslint-disable-next-line no-unused-vars
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 12,
+      // center: { lat: -25.344, lng: 131.036 },
+      center: new google.maps.LatLng(userListArr[0].lat, userListArr[0].lang)
+    });
+
     const marker = new google.maps.Marker({
-      // position: { lat: -25.344, lng: 131.036 },
-      position: markerLocation,
+      position: new google.maps.LatLng(userListArr[0].lat, userListArr[0].lang),
       map: map
     });
-    // console.log("markerLocation = " + markerLocation);
-    latlngbounds.extend(markerLocation);
+
+  } else {
+
+    for (i = 0; i < userListArr.length; i++) {
+      const markerLocation = new google.maps.LatLng(
+        userListArr[i].lat,
+        userListArr[i].lang
+      );
+
+      // eslint-disable-next-line no-unused-vars
+      const marker = new google.maps.Marker({
+        // position: { lat: -25.344, lng: 131.036 },
+        position: markerLocation,
+        map: map
+      });
+      latlngbounds.extend(markerLocation);
+    }
+    map.fitBounds(latlngbounds);
+
   }
-  map.fitBounds(latlngbounds);
+
 }
 
+// POST Request to Location Table
+function postLocation(geoLocationObj) {
+  console.log("postLocations = " + geoLocationObj);
+  console.log("postLocations.place = " + geoLocationObj.place);
+  console.log("postLocations.lat = " + geoLocationObj.lat);
+  console.log("postLocations.lang = " + geoLocationObj.lang);
+
+  const place = geoLocationObj.place;
+  const latitude = geoLocationObj.lat;
+  const longitude = geoLocationObj.lang;
+
+  $.post("/api/location", {
+    place: place,
+    latitude: latitude,
+    longitude: longitude
+  })
+    .then(function (data) {
+      // window.location.replace("/user_journal");
+    });
+}
 
 function getGeolocation(placeName) {
-  // console.log("userListArr" + userListArr);
-
   infowindow = new google.maps.InfoWindow();
   var map = new google.maps.Map(document.getElementById("map"));
 
-  // const unitedStates = new google.maps.LatLng(37.0902, -95.7129);
-  // map = new google.maps.Map(document.getElementById("map"), {
-  //   center: unitedStates,
-  //   zoom: 4,
-  // });
-
-  // console.log("placeName = " + placeName);
   const request = {
     query: placeName,
     fields: ["name", "geometry"]
@@ -88,65 +97,165 @@ function getGeolocation(placeName) {
   service.findPlaceFromQuery(request, (results, status) => {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (let i = 0; i < results.length; i++) {
-        console.log("results.length = " + results.length);
+        // console.log("results.length = " + results.length);
         infowindow.setContent(results[i].name);
         infowindow.open(map);
 
-        // map.setCenter(results[0].geometry.location);
-
         var latitude = results[i].geometry.location.lat();
-        var longtitude = results[i].geometry.location.lng();
+        var longitude = results[i].geometry.location.lng();
 
-        // console.log("latitude = " + latitude);
-        // console.log("longtitude = " + longtitude);
+        // Make an Object
+        const geoLocationObj = {
+          "place": placeName,
+          "lat": latitude,
+          "lang": longitude
+        }
+        collectUserSearch(geoLocationObj);
 
-        const geoLocationArr = [placeName, latitude, longtitude]
-        // console.log("geoLocationArr = " + geoLocationArr);
-
-        // Add new place into existing array
-        userListArr.push(geoLocationArr);
-        // console.log("userListArr = " + userListArr);
-        // console.log("userListArr[0] = " + userListArr[0]);
-        // console.log("userListArr[1] = " + userListArr[1]);
-        // console.log("userListArr[2] = " + userListArr[2]);
-        // console.log("userListArr[3] = " + userListArr[3]);
-        // console.log("userListArr[4] = " + userListArr[4]);
-
-        renderJournal(userListArr);
-        initMap(userListArr);
-        // console.log("geoLocationArr[0]" + geoLocationArr[0]);
-        // console.log("geoLocationArr[1]" + geoLocationArr[1]);
-        // console.log("geoLocationArr[2]" + geoLocationArr[2]);
+        // return geoLocationObj;
+        // Moved to collectUserSearch
+        // userListArr.push(geoLocationObj);
+        // // Render new userListArr
+        // renderJournal(userListArr);
+        // initMap(userListArr);
       }
     }
   });
+  // return userListArr;
+  // return geoLocationObj; not defined here
+}
+
+
+function collectUserSearch(geoLocationObj) {
+  console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
+  userListArr.push(geoLocationObj);
+
+  // Render new userListArr
+  // renderJournal(userListArr);
+  initMap(userListArr);
+  console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
+  postLocation(geoLocationObj);
+
 }
 
 function renderJournal() {
-  console.log("userListArr = " + userListArr);
+  console.log("userListArr.length under renderJournal = " + userListArr.length);
   if (userListArr) {
     for (var i = 0; i < userListArr.length; ++i) {
-      $(`#row${i}`).html(`<td><button class="">${userListArr[i][0]}</button>
+      $(`#row${i}`).html(`<td><p class="">${userListArr[i].place} ${userListArr[i].date}
       <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
-      <button class="" style="float:right"><i class="fas fa-camera"></i></button>
-      <button class="" style="float:right"><i class="fas fa-comment-dots"></i></button></td>`);
+      <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
+      <p class="">${userListArr[i].journal}</p>
+      </td>`);
 
-      $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i][0]}</p></td>`);
+      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i].place}</p></td>`);
 
     }
   }
-
-
 }
 
+
+
+// To have a landing map when array is first empty
 function landingMap() {
+
+  let newAddArr = [];
+  const userListArr = [];
+  // const newAdd = {};
+  const geoLocationObj = {};
+  console.log("newAddArr.length under landingMap = " + newAddArr.length);
+
+
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 2,
     // landing page center on united states
     center: new google.maps.LatLng(37.0902, -95.7129),
     mapTypeId: 'satellite'
-
   });
+}
+
+
+function handleSearchBtnSubmit(event) {
+  event.preventDefault;
+
+  console.log("newAddArr.length under Search Button = " + newAddArr.length);
+
+  var newAdd = {
+    // placeName: $('input').val(),
+    placeName: $('#placeForm').val(),
+    date: $("#date").val(),
+    journal: $("#journal-body").val(),
+    tripName: $("#tripName").val(),
+  };
+
+  getGeolocation(newAdd.placeName);
+  postJournal(newAdd);
+
+  newAddArr.push(newAdd);
+  renderJournal2(newAddArr);
+
+  $('#placeForm').val("");
+  $("#date").val("");
+  $("#journal-body").val("");
+
+}
+
+// Render Journal from the Array
+function renderJournal2(newAddArr) {
+  console.log("newAddArr.length under renderJournal2 = " + newAddArr.length);
+
+  for (var i = 0; i < newAddArr.length; ++i) {
+    console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
+    console.log("newAddArr[i].date = " + newAddArr[i].date);
+    console.log("newAddArr[i].journal = " + newAddArr[i].journal);
+    console.log("newAddArr[i].tripName = " + newAddArr[i].tripName);
+
+    $(`#row${i}`).html(`<td class="journal_table"><p>${newAddArr[i].placeName} - ${newAddArr[i].date}
+  <button class="" style="float:right"><i class="fas fa-trash-alt"></i></button>
+  <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
+  <p class="">${newAddArr[i].journal}</p>
+  </td>`);
+  }
+
+}
+
+// POST Request to database
+function postJournal(newAdd) {
+  const tripName = newAdd.tripName;
+  const placeName = newAdd.placeName;
+  const date = newAdd.date;
+  const journal = newAdd.journal;
+
+  $.post("/api/journal", {
+    journalTitle: tripName,
+    location: placeName,
+    start_date: date,
+    journalEntry: journal
+  })
+    .then(function (data) {
+      // window.location.replace("/user_journal");
+    });
+}
+
+
+function handlePushBtnSubmit(event) {
+  event.preventDefault;
+
+  $('#placeForm').val("");
+  $("#date").val("");
+  $("#journal-body").val("");
+  $("#tripName").val("");
+  $(".journal_table").remove();
+  
+
+  // Clear out array on Map and Journal
+  newAddArr = [];
+  userListArr = [];
+  geoLocationObj = {};
+
+  // init map to the default location
+  landingMap()
+
 }
 
 
@@ -154,104 +263,25 @@ function landingMap() {
 
 $(document).ready(function () {
 
+  // Render user journal list
   renderJournal();
 
+  // Render map section
   if (userListArr.length === 0) {
+    // Landing page when array is first empty
     landingMap();
   } else {
+    // Render map with existing array
     initMap(userListArr);
   }
 
+  // When user click to search a place
+  $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  $("#searchBtn").click(function (event) {
-    event.preventDefault;
-    
-    // WORKING SKIPPED FOR NOW TO SAVE API CALL
-    var placeName = $('input').val();
-    $('input').val('')
-    getGeolocation(placeName);
-  })
+  console.log("after serachButton newAddArr.length = " + newAddArr.length);
+
+  // When user click to finish a journal
+  $(document).on("click", "#pushBtn", handlePushBtnSubmit);
+
+
 });
-
-
-//////////////////////////////// BACK UP CODE //////////////////////////////////
-
-  // service = new google.maps.places.PlacesService(map);
-  // service.findPlaceFromQuery(request, (results, status) => {
-  //   if (status === google.maps.places.PlacesServiceStatus.OK) {
-
-  //     for (let i = 0; i < results.length; i++) {
-  //       // createMarker(results[i]);
-  //       const marker = new google.maps.Marker({
-  //         map,
-  //         position: results[i].geometry.location,
-  //       });
-
-  //       google.maps.event.addListener(marker, "click", () => {
-  //         infowindow.setContent(results[i].name);
-  //         infowindow.open(map);
-  //       });
-  //     }
-  //     console.log("results" + results);
-  //     console.log("results[0].geometry.location " + results[0].geometry.location);
-  //     map.setCenter(results[0].geometry.location);
-  //   }
-  // });
-
-
-  // function initMap() {
-  //   // user location input has to be in this format: arrays of arrays
-  //   const locations = [
-  //     ["Texas State Capitol", 30.2747, -97.7404],
-  //     ["Barton Spring Pool", 30.264, -97.771],
-  //     ["Frankin BBQ", 30.2701, -97.7313],
-  //     ["The Oasis on Lake Travis", 30.4057, -97.8741]
-  //   ];
-
-  //   // Always center the first location
-  //   const userLocation1LaLong = new google.maps.LatLng(
-  //     locations[0][1],
-  //     locations[0][2]
-  //   );
-
-  //   const map = new google.maps.Map(document.getElementById("map"), {
-  //     zoom: 13,
-  //     // center: { lat: -25.344, lng: 131.036 },
-  //     // center: new google.maps.LatLng(49.343085, -123.305938),
-  //     center: userLocation1LaLong
-  //   });
-
-  //   // Drop pins on all locations
-  //   const latlngbounds = new google.maps.LatLngBounds();
-  //   for (i = 0; i < locations.length; i++) {
-  //     // const userLocation1LaLong = new google.maps.LatLng(locations[0][1], locations[0][2]);
-  //     const markerLocation = new google.maps.LatLng(
-  //       locations[i][1],
-  //       locations[i][2]
-  //     );
-
-  //     // eslint-disable-next-line no-unused-vars
-  //     const marker = new google.maps.Marker({
-  //       // position: { lat: -25.344, lng: 131.036 },
-  //       position: markerLocation,
-  //       map: map
-  //     });
-  //     console.log("markerLocation = " + markerLocation);
-  //     latlngbounds.extend(markerLocation);
-  //   }
-  //   map.fitBounds(latlngbounds);
-
-  // }
-
-
-// function createMarker(place) {
-//   const marker = new google.maps.Marker({
-//     map,
-//     position: place.geometry.location,
-//   });
-//   google.maps.event.addListener(marker, "click", () => {
-//     infowindow.setContent(place.name);
-//     infowindow.open(map);
-//   });
-// }
-// e3e44393d8fd80f0b487c9913036c47ab55c301b

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal</title>
+
+
+     <!-- jQuery library -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <script src="../public/js/main-journal.js"></script>
+
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="./stylesheets/main-journal.css" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Original+Surfer&display=swap" rel="stylesheet">
+
+    <!-- ICON LIBRARY -->
+    <script src="https://kit.fontawesome.com/f53a07ee43.js" crossorigin="anonymous"></script>
+
+   
+
+</head>
+<body>
+
+    <div class="background">
+        <div class="home-screen-fade">
+            <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- Nav Bar -->
+            <nav>
+                <div class="navcontainer">
+                    <div class="nav-links">
+                        <ul id="nav-links-border1">
+                            <a href="Explore">| Explore |</a>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+<!--Page  Header -->
+            <div class="header">
+                <h1>Welcome to Your Travel Journal, Users.userName! (Users.profileImage)</h1>
+            </div>
+        </div>
+    </div>
+
+
+<!--Create Journal Button-->
+
+    <button class="newButton"><a href="./user_journal.html">Create New Journal</a></button>
+
+,<!-- Main Content-->
+
+<section class="Journal">
+
+
+    <!--Journal Entries-->
+                    <div class="entry" id="mexico-city">
+                        <h3>My Love for Mexico City</h3>
+                        <h4>Date</h4>
+                            <img src="../public/img/mexicocity.jpg">
+                            <p class="paragraph"> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. Sit esse est deserunt incididunt minim labore consectetur 
+                                                occaecat magna sit deserunt. Esse magna pariatur esse dolore. Laboris do nisi irure
+                                                do dolore est aliquip tempor eu eu do cillum fugiat.</p>
+                            <div class="journalButtons">
+                            <button class="editEntry">Edit</button>
+                            <button class="deleteEntry">Delete</button>
+                            </div>
+                    </div>
+                
+                    <div class="entry" id="thailand">
+                        <h3>Poo-ket or Fuket</h3>
+                        <h4>Date</h4>
+                        <img src="../public/img/phuket.jpg">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                             
+                             <div class="journalButtons">
+                            <button class="editEntry">Edit</button>
+                            <button class="deleteEntry">Delete</button>
+                            </div>
+                    </div>
+                    
+                    <div  class="entry" id="shanghai">
+                        <h3>A  24-Hour Layover in Shanghai</h3>
+                        <h4>Date</h4>
+                        <img src="../public/img/shanghai.jpg">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                                                <div class="journalButtons">
+                                                    <button class="editEntry">Edit</button>
+                                                    <button class="deleteEntry">Delete</button>
+                                                    </div>
+                                            </div> 
+
+                    <!-- <div  class="entry" id="Location">
+                        <div class="entry-header">
+                        <h3>Journal Entry Title<span class="date">Date</span></h3>
+                        <h4>Date</h4>
+                        <img src="..">
+                            <p> Excepteur dolore ipsum elit deserunt laborum ex eiusmod laboris 
+                                                labore amet commodo qui sunt laboris. Commodo elit cupidatat excepteur reprehenderit 
+                                                fugiat labore sint magna voluptate. </p>
+                        </div>
+                    </div> -->
+                    
+                </section> 
+
+</html>
