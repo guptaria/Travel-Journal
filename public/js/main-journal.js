@@ -7,7 +7,6 @@ $(document).ready(function () {
   var img = $("<img>");
   var paragraph = $(".paragraph");
 
-  var UserId = "";
   // Gets post data for a post if we're editing
   function getJournalData(UserId) {
     $.get("/api/userJournalPage/" + UserId, function (data) {
@@ -28,7 +27,7 @@ $(document).ready(function () {
     $.get("/api/user_data", function (data) {
       console.log(data);
       // make sure you are grabbing the correct id from the console log above
-      UserId = data.UserId;
+      const UserId = data.UserId;
       // now run the call with the userId
       getJournalData(UserId);
     });

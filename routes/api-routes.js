@@ -57,19 +57,12 @@ module.exports = function(app) {
   
       // No user found with the given email, we need to create new user in our database
       db.User.create({
-        UserId: req.body.id,
         email: req.body.email,
         userName: req.body.userName,
         profileImage: req.body.profileImage,
         provider: "google"
       })
       .then(function(dbUser) {
-        res.cookie.user = {
-          UserId: dbUser.id,
-          email: dbUser.email,
-          userName: dbUser.userName,
-          profileImage: dbUser.profileImage
-        };
         res.cookie.user = {
           UserId: dbUser.id,
           email: dbUser.email,
@@ -94,16 +87,9 @@ module.exports = function(app) {
   app.get("/api/user_data", function(req, res) {
     console.log(req.session);
 
-    if (req.user) {
-      return res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-
     if(res.cookie.user) {
       return res.json({
-        UserId: res.cookie.user.id,
+        UserId: res.cookie.user.UserId,
         email: res.cookie.user.email,
         userName: res.cookie.user.userName,
         profileImage: res.cookie.user.profileImage
