@@ -241,6 +241,7 @@ function postJournal(newAdd) {
   })
     .then(function (data) {
       // window.location.replace("/user_journal");
+      alert("Adding journal...");
     });
 }
 

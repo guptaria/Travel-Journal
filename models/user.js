@@ -82,21 +82,21 @@ module.exports = function(sequelize, DataTypes) {
   };
 
   //Creating one to many relationship with the location table. Basically one user can have more than one location in the database
-  // User.associate = function(models) {
-  //   // Associating User with location
-  //   // When an User is deleted, also delete any associated location
-  //   User.hasMany(models.location, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  User.associate = function(models) {
+    // Associating User with location
+    // When an User is deleted, also delete any associated location
+    User.hasMany(models.userLocation, {
+      onDelete: "cascade"
+    });
+  };
 
   //Many to Many realationship between user and location
-  User.associate = (models) => {
-  User.belongsToMany(models.location, {
-    through: "merge",
-    as: "users",
-    foreignKey: "user_id",
-  });
-};
+//   User.associate = (models) => {
+//   User.belongsToMany(models.location, {
+//     through: "merge",
+//     as: "users",
+//     foreignKey: "user_id",
+//   });
+// };
   return User;
 };
