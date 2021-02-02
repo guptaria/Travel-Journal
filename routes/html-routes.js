@@ -5,39 +5,41 @@ var path = require("path");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
+    app.get('/', function (req, res) {
+        // If the user already has an account send them to the members page
+        if (req.user) {
+            res.redirect('/home');
+        }
+        // res.sendFile(path.join(__dirname, "../public/sign-up.html"));
+        // res.sendFile(path.join(__dirname, "../public/google-signup.html"));
+        res.sendFile(path.join(__dirname, '../public/user_journal.html'));
+    });
 
-  app.get("/", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/home");
-    }
-    // res.sendFile(path.join(__dirname, "../public/sign-up.html"));
-    // res.sendFile(path.join(__dirname, "../public/google-signup.html"));
-    res.sendFile(path.join(__dirname, "../public/user_journal.html"));
-  });
+    app.get('/login', function (req, res) {
+        // If the user already has an account send them to the members page
+        if (req.user) {
+            res.redirect('/home');
+        }
+        res.sendFile(path.join(__dirname, '../public/sign-up-in.html'));
+        // res.sendFile(path.join(__dirname, "../public/google-login.html"));
+    });
 
-  app.get("/login", function(req, res) {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/home");
-    }
-    // res.sendFile(path.join(__dirname, "../public/log-in.html"));
-    res.sendFile(path.join(__dirname, "../public/google-login.html"));
-  });
+    // Here we've add our isAuthenticated middleware to this route.
+    // If a user who is not logged in tries to access this route they will be redirected to the signup page
+    // app.get("/members", isAuthenticated, function(req, res) {
+    //   res.sendFile(path.join(__dirname, "../public/members.html"));
+    // });
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  // app.get("/members", isAuthenticated, function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/members.html"));
-  // });
-
-  // Route to explore page
-  app.get("/explore", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/explore.html"));
-  });
-  // Routes to user page
-  app.get("/home", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/home.html"));
-  });
-
+    // Route to explore page
+    app.get('/explore', function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/user-home.html'));
+    });
+    // Routes to user page
+    app.get('/home', function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/home.html'));
+    });
+    // Routes to journal page
+    app.get('/journal', function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/main-journal.html'));
+    });
 };

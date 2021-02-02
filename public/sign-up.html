@@ -4,6 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Travle Journal</title>
+        <!-- Google Api -->
+         <meta name="google-signin-client_id"
+    content="920140835860-cpnecgvcp9neij0s5h3s6srepd6ihshd.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -11,71 +15,80 @@
             rel="stylesheet"
         />
         <!-- CSS Style link -->
-        <link rel="stylesheet" href="../public/stylesheets/sign-in.css" />
+        <link rel="stylesheet" href="./stylesheets/sign-in.css" />
     </head>
     <body>
-        <h1 id="logo"><a href="user-home.html">Travle Journal</a></h1>
-        <form autocomplete="off" class="form">
-            <div class="control">
-                <h1>Sign up</h1>
+        <div class="container right-panel-active">
+            <div class="container__form container--signup">
+                <form class='signup' id="form1">
+                    <h2 class="form__title">Sign Up</h2>
+                    <input
+                        type="email"
+                        id="email-input"
+                        placeholder="Email"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        id="password-input"
+                    />
+                    <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+          </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
             </div>
-            <div class="control block-cube block-input">
-                <input name="username" placeholder="Username" type="text" />
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
+
+            <div class="container__form container--signin">
+                <form class="login" id="form2">
+                    <h2 class="form__title">Sign In</h2>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        class="email-input"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        class="password-input"
+                    />
+                    <a href="#" class="link">Forgot your password?</a>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
+            </div>
+
+            <div class="container__overlay">
+                <div class="overlay">
+                    <div class="overlay__panel overlay--left">
+                        <button class="btn" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay__panel overlay--right">
+                        <button class="btn" id="signUp">Sign Up</button>
+                    </div>
                 </div>
             </div>
-            <div class="control block-cube block-input">
-                <input name="password" placeholder="Password" type="password" />
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-            </div>
-            <div class="control block-cube block-input">
-                <input
-                    name="password"
-                    placeholder="Repeat Password"
-                    type="password"
-                />
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-            </div>
-            <button class="btn block-cube block-cube-hover" type="button">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">SIGN UP</div>
-            </button>
-            <div class="already-have">
-                <p>
-                    <a href="log-in.html">Already have an account? Sign in</a>
-                </p>
-            </div>
-        </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/google-login.js"></script>
+        <script type="text/javascript" src="js/signup.js"></script>
+        <script>
+            const signInBtn = document.getElementById('signIn');
+            const signUpBtn = document.getElementById('signUp');
+            const fistForm = document.getElementById('form1');
+            const secondForm = document.getElementById('form2');
+            const container = document.querySelector('.container');
+
+            signInBtn.addEventListener('click', () => {
+                container.classList.remove('right-panel-active');
+            });
+
+            signUpBtn.addEventListener('click', () => {
+                container.classList.add('right-panel-active');
+            });
+
+            fistForm.addEventListener('submit', (e) => e.preventDefault());
+            secondForm.addEventListener('submit', (e) => e.preventDefault());
+        </script>
     </body>
 </html>

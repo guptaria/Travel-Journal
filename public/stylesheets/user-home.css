@@ -95,7 +95,7 @@ body {
 .homeScreen {
     height: 100vh;
     z-index: -2;
-    background: url(../img/milkyway.jpg);
+    background: url(../img/login:signup.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
