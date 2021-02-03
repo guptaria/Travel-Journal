@@ -242,6 +242,6 @@ app.get("/api/userPage/:UserId", function(req, res) {
   //     });
   // });
 
-};
+  });
 
-
+}
