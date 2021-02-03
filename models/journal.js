@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
     userEmail: {
       type: DataTypes.STRING,
       validate: {
-        len: [1 - 50]
+        len: [1, 50]
       }
     },
     journalTitle: {

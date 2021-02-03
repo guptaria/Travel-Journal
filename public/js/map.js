@@ -272,14 +272,14 @@ function handlePushBtnSubmit(event) {
 $(document).ready(function () {
 
 
-  $.get("/api/user_data").then(data => {
-    $(".member-name").text(data.email);
-    memberEmail = data.email;
-    console.log(memberEmail);
-  });
+  // $.get("/api/user_data").then(data => {
+  //   $(".member-name").text(data.email);
+  //   memberEmail = data.email;
+  //   console.log(memberEmail);
+  // });
 
   // Render user journal list
-  renderJournal();
+  // renderJournal();
 
   // Render map section
   if (userListArr.length === 0) {

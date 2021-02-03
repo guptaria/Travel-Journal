@@ -1,4 +1,3 @@
-
 // var UserId = document.cookie;
 //   console.log(UserId);
 
@@ -26,62 +25,74 @@
 //     });
 //   }
 $(document).ready(function () {
-  
-  const journalSection = $(`section.Journal`);
 
-  // Gets post data for a post if we're editing
-  function getJournalData(UserId) {
-    $.get("/api/userJournalPage/" + UserId, function (data) {
-      console.log(data);
-      if (data) {
+      const journalSection = $(`section.Journal`);
 
-        data.forEach(function (entry) {
+      // Gets post data for a post if we're editing
+      function getJournalData(UserId) {
+        $.get("/api/userJournalPage/" + UserId, function (data) {
+          console.log(data);
+          if (data) {
 
-          const mainEntry = $(`<div class="entry">`);
-          mainEntry.data("UserId", entry.UserId);
+            data.forEach(function (entry) {
 
-          const h3 = $(`<h3>`);
-          h3.text(entry.journalTitle);
+              const mainEntry = $(`<div class="entry">`);
+              mainEntry.data("UserId", entry.UserId);
 
-          const h4 = $(`<h4>`);
-          h4.text(entry.start_date);
+              const h3 = $(`<h3>`);
+              h3.text(entry.journalTitle);
 
-          const img = $(`<img>`);
-          img.attr(`src`, `./img/mexicocity.jpg`);
+              const h4 = $(`<h4>`);
+              h4.text(entry.start_date);
 
-          const paragraph = $(`<p class="paragraph">`);
-          paragraph.text(entry.journalEntry);
-          
-          const journalButtons = $(`<div class="journalButtons">`);
-          const editButton = $(`<button class="editEntry">Edit</button>`);
-          editButton.data("UserId", entry.UserId);
-              
-          const deleteButton = $(`<button class="deleteEntry">Delete</button>`);
-          deleteButton.data("UserId", entry.UserId);
-          journalButtons.append(editButton, deleteButton);
+              const img = $(`<img>`);
+              img.attr(`src`, `./img/mexicocity.jpg`);
 
-          mainEntry.append(h3, h4, img, paragraph, journalButtons);
+              const paragraph = $(`<p class="paragraph">`);
+              paragraph.text(entry.journalEntry);
 
-          journalSection.append(mainEntry);
+              const journalButtons = $(`<div class="journalButtons">`);
+              const editButton = $(`<button class="editEntry">Edit</button>`);
+              editButton.data("UserId", entry.UserId);
+
+              const deleteButton = $(`<button class="deleteEntry">Delete</button>`);
+              deleteButton.data("UserId", entry.UserId);
+              journalButtons.append(editButton, deleteButton);
+
+              mainEntry.append(h3, h4, img, paragraph, journalButtons);
+
+              journalSection.append(mainEntry);
+            });
+          }
         });
+      }
 
 
-  
-// $(document).ready(function(){
-//    $('p').hide();
-//    $('h3').click(function (){
-//        $('p').hide();
-//        $(this).parent().children('p').toggle();
-//      });
 
-//    $('.journalButtons').hide();
-//    $('h3').click(function (){
-//        $('.journalButtons').hide();
-//        $(this).parent().children('.journalButtons').toggle();
-//      });
+      $.get("/api/user_data", function (data) {
+        console.log(data);
+        // make sure you are grabbing the correct id from the console log above
+        UserId = data.UserId;
+        // now run the call with the userId
+        getJournalData(UserId);
+      });
+});
 
-//     //  $('h3').click(function (){
-//     //      $('p').toggle();
-//     //  });
-//    });
 
+    // $(document).ready(function(){
+    //    $('p').hide();
+    //    $('h3').click(function (){
+    //        $('p').hide();
+    //        $(this).parent().children('p').toggle();
+    //      });
+
+    //    $('.journalButtons').hide();
+    //    $('h3').click(function (){
+    //        $('.journalButtons').hide();
+    //        $(this).parent().children('.journalButtons').toggle();
+    //      });
+
+    //     //  $('h3').click(function (){
+    //     //      $('p').toggle();
+    //     //  });
+    //    });
