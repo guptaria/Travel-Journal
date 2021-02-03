@@ -34,14 +34,14 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     start_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       // defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
+      allowNull: true
     },
     end_date: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
+      type: DataTypes.DATEONLY,
+      // defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: true
     }
 
   },
