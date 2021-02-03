@@ -147,12 +147,13 @@ module.exports = function(app) {
 });
 
 // GET route for getting all of the userJournalPage
-app.get("/api/userJournalPage/:UserId", function(req, res) {
+app.get("/api/userPage/:UserId", function(req, res) {
   // findAll returns all entries for a table when used with no options
   db.journal.findAll({
       where: {UserId: req.params.UserId}
   }).then(function(dbUserJournal) {
     // We have access to the todos as an argument inside of the callback function
+    console.log(dbUserJournal);
     res.json(dbUserJournal);
   });
 });

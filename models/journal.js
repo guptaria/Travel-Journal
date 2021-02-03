@@ -51,7 +51,7 @@ module.exports = function (sequelize, DataTypes) {
     journal.belongsTo(models.User,
       // { as: 'User'}, 
       {
-        foreignKey:{allowNull:false}
+        foreignKey:{allowNull:true}
         
       });
   };

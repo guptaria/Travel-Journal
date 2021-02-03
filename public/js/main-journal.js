@@ -2,21 +2,22 @@
 //   console.log(UserId);
 
 $(document).ready(function () {
-  var h3 = $("<h3>");
+  var h3 = $(".titleThis");
   var h4 = $("<h4>");
   var img = $("<img>");
   var paragraph = $(".paragraph");
 
   // Gets post data for a post if we're editing
   function getJournalData(UserId) {
-    $.get("/api/userJournalPage/" + UserId, function (data) {
+    $.get("/api/userPage/" + UserId, function (data) {
+      alert('this is running')
       console.log(data);
+      h3.text(data.journalTitle);
       if (data) {
         // If this post exists, prefill our cms forms with its data
-        h3.val(data.journalTitle);
-        paragraph.val(data.journalEntry);
+        paragraph.text(data.journalEntry);
         // postCategorySelect.val(data.location);
-        h4.val(data.start_date);
+        h4.text(data.start_date);
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
                 // updating = true;
@@ -28,6 +29,7 @@ $(document).ready(function () {
       console.log(data);
       // make sure you are grabbing the correct id from the console log above
       const UserId = data.UserId;
+      console.log(UserId);
       // now run the call with the userId
       getJournalData(UserId);
     });
