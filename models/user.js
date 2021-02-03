@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     userName: {
       type: DataTypes.STRING,
-      //allowNull: false,
+      allowNull: true,
     },
     // The email cannot be null, and must be a proper email before creation
     email: {
@@ -35,7 +35,6 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     },
-
     profileImage: {
       type: DataTypes.STRING,
       allowNull: true,

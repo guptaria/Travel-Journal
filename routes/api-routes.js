@@ -43,9 +43,11 @@ module.exports = function(app) {
         email: userEmail
       }
     }).then(function(dbUser) {
+      console.log(dbUser);
       // If user is already exists then we should just add them to session and redirect to homepage
       if (dbUser) {
         res.cookie.user = {
+          UserId: dbUser.id,
           email: dbUser.email,
           userName: dbUser.userName,
           profileImage: dbUser.profileImage
@@ -62,11 +64,7 @@ module.exports = function(app) {
       })
       .then(function(dbUser) {
         res.cookie.user = {
-          email: dbUser.email,
-          userName: dbUser.userName,
-          profileImage: dbUser.profileImage
-        };
-        res.cookie.user = {
+          UserId: dbUser.id,
           email: dbUser.email,
           userName: dbUser.userName,
           profileImage: dbUser.profileImage
@@ -89,15 +87,9 @@ module.exports = function(app) {
   app.get("/api/user_data", function(req, res) {
     console.log(req.session);
 
-    if (req.user) {
-      return res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    }
-
     if(res.cookie.user) {
       return res.json({
+        UserId: res.cookie.user.UserId,
         email: res.cookie.user.email,
         userName: res.cookie.user.userName,
         profileImage: res.cookie.user.profileImage
@@ -149,20 +141,30 @@ module.exports = function(app) {
       // console.log(dblocations);
       // res.redirect(307, "/api/login");
       // res.json(dblocations);
+    db.journal.create({
+      journalTitle: req.body.journalTitle,
+      location: req.body.location,
+      start_date: req.body.start_date,
+      journalEntry: req.body.journalEntry,
+      UserId: res.cookie.user.UserId
     })
-    // .catch(function(err) {
-    //   res.status(401).json(err);
-    // });
+    .then(function(dbJournal) {
+      res.json(dbJournal);
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.status(401).json(err);
+    });
 });
 
-
 // GET route for getting all of the userJournalPage
-app.get("/api/userJournalPage:id", function(req, res) {
+app.get("/api/userPage/:UserId", function(req, res) {
   // findAll returns all entries for a table when used with no options
-  db.User.findAll({
-      where: {id: req.params.id}
+  db.journal.findAll({
+      where: {UserId: req.params.UserId}
   }).then(function(dbUserJournal) {
     // We have access to the todos as an argument inside of the callback function
+    console.log(dbUserJournal);
     res.json(dbUserJournal);
   });
 });
@@ -240,6 +242,6 @@ app.get("/api/userJournalPage:id", function(req, res) {
   //     });
   // });
 
-};
+  });
 
-
+}
