@@ -41,7 +41,16 @@ module.exports = function(app) {
   
   app.get('/my-journals', isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, '../public/main-journal.html'));
-});
+    });
+
+    app.get('/sign-up', function (req, res) {
+    // If the user already has an account send them to the members page
+    // if (req.user) {
+    //   res.redirect("/home.html");
+    // }
+    // res.sendFile(path.join(__dirname, "../public/log-in.html"));
+    res.sendFile(path.join(__dirname, '../public/sign-up.html'));
+    });
 
   // app.get("/userPage", function(req, res) {
   //   // If the user already has an account send them to the google-login page
