@@ -42,8 +42,13 @@ $(document).ready(function () {
               const h3 = $(`<h3>`);
               h3.text(entry.journalTitle);
 
+              // const h4Location = $(`<h4>`);
+              // h4Location.text(entry.location);
               const h4 = $(`<h4>`);
-              h4.text(entry.start_date);
+              h4.text(entry.location + " : " + entry.start_date);
+
+              // const h4 = $(`<h4>`);
+              // h4.text(entry.start_date);
 
               const img = $(`<img>`);
               img.attr(`src`, `./img/mexicocity.jpg`);

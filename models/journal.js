@@ -39,9 +39,9 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     },
     end_date: {
-      type: 'TIMESTAMP',
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false
+      type: DataTypes.DATE,
+      // defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      allowNull: true
     }
 
   },
