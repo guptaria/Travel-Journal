@@ -43,6 +43,9 @@ $(document).ready(function () {
               h3.text(entry.journalTitle);
 
               const h4 = $(`<h4>`);
+              h3.text(entry.location);
+
+              const h4 = $(`<h4>`);
               h4.text(entry.start_date);
 
               const img = $(`<img>`);
