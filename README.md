@@ -34,7 +34,7 @@ GIF of working page here:
 BySondra - https://github.com/lovejustbry
 Priya - https://github.com/guptaria 
 Thammarak - https://github.com/thammaraku 
-Jones - https://github.com/jonesliddy77
+Jones - https://github.com/jonesliddy7
 Christian - https://github.com/Romer0-c
 
 
@@ -49,8 +49,9 @@ Bootstrap
 MySQL2
 Sequelize
 Express
-Google API
-Google Earth Library 
+Google Map API
+Web GL Earth 2.0 API
+SYGIC Travel API 
 GoogleAuth
 
 ----

@@ -1,182 +1,172 @@
-*,
-::after,
-::before {
-    box-sizing: border-box;
+:root{
+  font-size:16px;
+font-family: 'Nanum Myeongjo', serif;
 }
-:root {
-    --green: rgb(156, 194, 18);
-    --blue: rgb(71, 189, 225);
-    --white: rgb(241, 241, 241);
-    --yellow: rgb(252, 222, 54);
-    --red: rgb(192, 20, 20);
-}
-
-body {
-    background: var(--blue);
-    color: var(--white);
-    font-family: 'Nanum Myeongjo', serif;
-}
-/* logo */
-a:-webkit-any-link {
-    color: var(--white);
-    cursor: pointer;
-    text-decoration: none;
-}
-#logo {
-    font-size: 1.5rem;
-    padding: 1rem;
-    text-transform: uppercase;
-    animation: flicker 1.5s infinite alternate;
-    width: 300px;
-    text-align: center;
-    margin: 5px;
+body{
+  align-items:center;
+  background-color:#e9e9e9;
+  background:url(../img/new-signup.jpeg);
+  background-attachment:fixed;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:grid;
+  height:100vh;
+  place-items:center;
 }
 
-/* form */
-h1 {
-    font-size: 23px;
+.form__title{
+  font-weight:300;
+  margin:0;
+  margin-bottom:1.25rem;
 }
-.form {
-    width: 400px;
-    padding: 64px 15px 24px;
-    margin: 0 auto;
-        font-family: 'Nanum Myeongjo', serif;
 
+.link{
+  color:#333;
+  font-size:0.9rem;
+  margin:1.5rem 0;
+}
+.container{
+  background-color:#e9e9e9;
+  border-radius:0.7rem;
+  box-shadow: 0 0.9rem 1.7rem rgba(0,0,0,0.25),
+    0 0.7rem 0.7rem rgba(0,0,0,0.22);
+  height:420px;
+  max-width:758px;
+  overflow:hidden;
+  position:relative;
+  width:100%;
+}
 
+.container__form{
+  height:100%;
+  position:absolute;
+  transition:all 0.6s ease-in-out;
 }
-.form .control {
-    margin: 0 0 24px;
+.container--signin{
+  left:0;
+  width:50%;
+  z-index:2;
 }
-.form .control input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 0;
-    background: transparent;
-    color: rgba(129, 129, 129, 0.994);
-    letter-spacing: 0.05em;
-    font-size: 16px;
+.container.right-panel-active .container--signin{
+  transform: translateX(100%);
 }
-.form .control input:hover,
-.form .control input:focus {
-    outline: none;
-    border: 0;
+.container--signup{
+  left:0;
+  opacity:0;
+  width:50%;
+  z-index:1;
 }
-.form .btn {
-    width: 100%;
-    display: block;
-    padding: 14px 16px;
-    background: transparent;
-    outline: none;
-    border: 0;
-    color: rgba(129, 129, 129, 0.994);
-    letter-spacing: 0.1em;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 16px;
+.container.right-panel-active .container--signup{
+  animation:show 0.6s;
+  opacity:1;
+  transform:translateX(100%);
+  z-index:5;
 }
-.block-cube {
-    position: relative;
+.container__overlay{
+  height:100%;
+  left:50%;
+  overflow:hidden;
+  position:absolute;
+  top:0;
+  transition:transform 0.6s ease-in-out;
+  width:50%;
+  z-index:100;
 }
-.block-cube .bg-top {
-    position: absolute;
-    height: 15px;
-    background: #020024;
-    background: linear-gradient(
-        90deg,
-        var(--white) 0%,
-        var(--blue) 94%
-    );
-    bottom: 100%;
-    left: 5px;
-    right: -5px;
-    transform: skew(-45deg, 0);
-    margin: 0;
+.container.right-panel-active .container__overlay{
+  transform:translateX(-100%);
 }
-.block-cube .bg-top .bg-inner {
-    bottom: 0;
+.overlay{
+  background-color:#008997;
+  background:url(../img/new-signup.jpeg);
+  background-attachment:fixed;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  height:100%;
+  left:-100%;
+  position:relative;
+  transform:translateX(0);
+  transition:transform 0.6s ease-in-out;
+  width:200%;
 }
-.block-cube .bg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: #020024;
-    background: linear-gradient(
-        90deg,
-        var(--white) 5%,
-        var(--blue) 94%
-    );
+.container.right-panel-active .overlay{
+  transform:translateX(50%);
 }
-.block-cube .bg-right {
-    position: absolute;
-    background: var(--yellow);
-    top: -5px;
-    z-index: 0;
-    bottom: 5px;
-    width: 10px;
-    left: 100%;
-    transform: skew(0, -45deg);
+.overlay__panel{
+  align-items:center;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  justify-content:center;
+  position:absolute;
+  text-align:center;
+  top:0;
+  transform:translateX(0);
+  transition:transform 0.6s ease-in-out;
+  width:50%;
 }
-.block-cube .bg-right .bg-inner {
-    left: 0;
+.overlay--left{
+  transform:translateX(-20%);
 }
-.block-cube .bg .bg-inner {
-    transition: all 0.2s ease-in-out;
+.container.right-panel-active .overlay--left{
+  transform:translateX(0);
 }
-.block-cube .bg-inner {
-    background: var(--yellow);
-    position: absolute;
-    left: 2px;
-    top: 2px;
-    right: 2px;
-    bottom: 2px;
+.overlay--right{
+  right:0;
+  transform:translateX(0);
 }
-.block-cube .text {
-    position: relative;
-    z-index: 2;
+.container.right-panel-active .overlay--right{
+  transform:translateX(20%);
 }
-.block-cube.block-input input {
-    position: relative;
-    z-index: 2;
+.btn{
+   background-color:#0367a6;
+  background-image:linear-gradient(90deg,#0367a6 0%,#008997 74%);
+  border-radius:20px;
+  border:1px solid #0367a6;
+  color:#e9e9e9;
+  cursor:pointer;
+  font-size:0.8rem;
+  letter-spacing:0.1rem;
+  padding:0.9rem 4rem;
+  text-transform:uppercase;
+  transition:transform 80ms ease-in;
 }
-.block-cube.block-input input:focus ~ .bg-right .bg-inner,
-.block-cube.block-input input:focus ~ .bg-top .bg-inner,
-.block-cube.block-input input:focus ~ .bg-inner .bg-inner {
-    top: 100%;
-    background: rgba(255, 255, 255, 0.5);
+
+.fomr > .btn{
+  margin-top:1.5rem;
 }
-.block-cube.block-input .bg-top,
-.block-cube.block-input .bg-right,
-.block-cube.block-input .bg {
-    background: rgba(255, 255, 255, 0.5);
-    transition: background 0.2s ease-in-out;
+
+.btn:active{
+  transform:scale(0.95);
 }
-.block-cube.block-input .bg-right .bg-inner,
-.block-cube.block-input .bg-top .bg-inner {
-    transition: all 0.2s ease-in-out;
+
+.btn:focus{
+  outline:none;
 }
-.block-cube.block-input:focus .bg-top,
-.block-cube.block-input:hover .bg-top,
-.block-cube.block-input:focus .bg-right,
-.block-cube.block-input:hover .bg-right,
-.block-cube.block-input:focus .bg,
-.block-cube.block-input:hover .bg {
-    background: rgba(255, 255, 255, 0.8);
+.signup, .login{
+  background-color:#e9e9e9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:0 3rem;
+  height:100%;
+  text-align:center;
 }
-.block-cube.block-cube-hover:focus .bg .bg-inner,
-.block-cube.block-cube-hover:hover .bg .bg-inner {
-    top: 100%;
+#password-input, #email-input, .email-input, .password-input{
+  border:none;
+  padding:0.9rem 0.9rem;
+  margin:0.5rem 0;
+  width:100%;
 }
-.already-have a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-    padding-left: 10px;
-}
-.dont-have a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 12px;
-    padding-left: 10px;
+@keyframes show{
+  0%,49.99%{
+    opacity:0;
+    z-index:1;
+  }
+  50%,100%{
+    opacity:1;
+    z-index:5;
+  }
 }
