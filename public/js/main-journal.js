@@ -26,7 +26,7 @@
 //     });
 //   }
 $(document).ready(function () {
-  
+
   const journalSection = $(`section.Journal`);
 
   // Gets post data for a post if we're editing
@@ -51,11 +51,11 @@ $(document).ready(function () {
 
           const paragraph = $(`<p class="paragraph">`);
           paragraph.text(entry.journalEntry);
-          
+
           const journalButtons = $(`<div class="journalButtons">`);
           const editButton = $(`<button class="editEntry">Edit</button>`);
           editButton.data("UserId", entry.UserId);
-              
+
           const deleteButton = $(`<button class="deleteEntry">Delete</button>`);
           deleteButton.data("UserId", entry.UserId);
           journalButtons.append(editButton, deleteButton);
@@ -66,7 +66,16 @@ $(document).ready(function () {
         });
 
 
-  
+        $.get("/api/user_data", function (data) {
+          console.log(data);
+          // make sure you are grabbing the correct id from the console log above
+          UserId = data.UserId;
+          // now run the call with the userId
+          getJournalData(UserId);
+        });
+
+      
+
 // $(document).ready(function(){
 //    $('p').hide();
 //    $('h3').click(function (){
@@ -85,4 +94,3 @@ $(document).ready(function () {
 //     //  });
 //    });
 
-      
