@@ -130,20 +130,20 @@ module.exports = function(app) {
     console.log("req.body.start_date = " + req.body.start_date);
     console.log("req.body.journalEntry = " + req.body.journalEntry);
     
-  db.journal.create({
-    journalTitle: req.body.journalTitle,
-    location: req.body.location,
-    start_date: req.body.start_date,
-    journalEntry: req.body.journalEntry
-  })
-    .then(function(dblocations) {
-      // console.log(dblocations);
-      // res.redirect(307, "/api/login");
-      // res.json(dblocations);
+    db.journal.create({
+      journalTitle: req.body.journalTitle,
+      location: req.body.location,
+      start_date: req.body.start_date,
+      journalEntry: req.body.journalEntry,
+      UserId: res.cookie.user.UserId
     })
-    // .catch(function(err) {
-    //   res.status(401).json(err);
-    // });
+    .then(function(dbJournal) {
+      res.json(dbJournal);
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.status(401).json(err);
+    });
 });
 
 // GET route for getting all of the userJournalPage
