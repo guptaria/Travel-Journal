@@ -69,6 +69,11 @@ module.exports = function(sequelize, DataTypes) {
         // as: "locations",
         // foreignKey: "location_id",
       });
+
+      // Relationship between location and journal, one location can have multiple journals
+      userLocation.hasMany(models.journal, {
+        onDelete: "cascade"
+      });
     };
 
     ////Creating one to many relationship with the user table. Basically one user can have more than one location in the database
@@ -79,15 +84,6 @@ module.exports = function(sequelize, DataTypes) {
     //     }
     //   });
     // };
-
-    // Relationship between location and journal, one location can have multiple journals
-    userLocation.associate = function(models) {
-      userLocation.hasMany(models.journal, {
-        onDelete: "cascade"
-     });
-   };
-
- 
 
   // Relationship between location and journal, one journal can have multiple locations
   // location.associate = function (models) {

@@ -101,30 +101,56 @@ module.exports = function (app) {
     res.json({});
   });
 
-  // Thammarak Try Post Journal
-  app.post("/api/location", function (req, res) {
+  // Add journal
+  app.post("/api/location", async function (req, res) {
     console.log("req.body.place = " + req.body.place);
     console.log("req.body.latitude = " + req.body.latitude);
     console.log("req.body.longitude = " + req.body.longitude);
-
-    db.userLocation.create({
+    try {
+      const dbLocation = await db.userLocation.create({
         place: req.body.place,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
         UserId: req.user && req.user.id || res.cookie.user.UserId,
-      })
-      .then(function (dblocations) {
-        res.json(dblocations);
-      })
-      .catch(function (err) {
-        console.log(err);
-        res.status(401).json(err);
       });
+
+      const user = await db.User.findOne({where: {id: req.user && req.user.id || res.cookie.user.UserId}});
+      console.log(user);
+      await dbLocation.addUser(user);
+      res.json(dbLocation);
+    } catch(error) {
+      console.log(error);
+      res.status(401).json(error);
+    }
   });
 
+  // Search specific location and get all of its users who has it in their journal
+  app.get("/api/users_by_location/:locationId", async function(req, res) {
+    try {
+      // View all users who share the same location
+      const location = await db.userLocation.findOne({where: {id : req.params.locationId}});
+      const allMatchingUsersByLocation = await location.getUsers();
+      res.json(allMatchingUsersByLocation);
+
+      /* 
+        Note: be sure to remove all the logic above ^^^^  if you care to use the code below.
+        If you wish to include book details along with Users in response then uncomment following:
+      */
+      /*
+        const allMatchingUsersByLocation = await db.userLocation.findOne({
+          where: {id : req.params.locationId},
+          include: [db.User]
+        });
+        res.json(allMatchingUsersByLocation);
+      */
+
+    } catch(err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
 
   app.post("/api/journal", function (req, res) {
-
     console.log("req.body.journalTitle = " + req.body.journalTitle);
     console.log("req.body.location = " + req.body.location);
     console.log("req.body.start_date = " + req.body.start_date);
@@ -147,7 +173,7 @@ module.exports = function (app) {
       });
   });
 
-  // // GET route for getting all of the userJournalPage
+  // GET route for getting all of the userJournalPage
   app.get("/api/userJournalPage/:UserId", function (req, res) {
     // findAll returns all entries for a table when used with no options
     db.journal.findAll({

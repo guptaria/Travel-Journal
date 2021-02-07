@@ -78,6 +78,13 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.journal, {
       onDelete: "cascade"
     });
+
+    // Many to Many relationship between user and location
+    User.belongsToMany(models.userLocation, {
+      through: "merge",
+      // as: "users",
+      // foreignKey: "user_id",
+    });
   };
 
   //Creating one to many relationship with the location table. Basically one user can have more than one location in the database
@@ -89,13 +96,5 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   // };
 
-  //Many to Many realationship between user and location
-  User.associate = (models) => {
-  User.belongsToMany(models.userLocation, {
-    through: "merge",
-    // as: "users",
-    // foreignKey: "user_id",
-  });
-};
   return User;
 };
