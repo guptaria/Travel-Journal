@@ -63,22 +63,22 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     // Many to Many realationship between user and location
-    // location.associate = (models) => {
-    //   location.belongsToMany(models.User, {
-    //     through: "merge",
-    //     as: "locations",
-    //     foreignKey: "location_id",
-    //   });
-    // };
-
-    ////Creating one to many relationship with the user table. Basically one user can have more than one location in the database
-    userLocation.associate = function (models) {
-      userLocation.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false
-        }
+    userLocation.associate = (models) => {
+      userLocation.belongsToMany(models.User, {
+        through: "merge",
+        // as: "locations",
+        // foreignKey: "location_id",
       });
     };
+
+    ////Creating one to many relationship with the user table. Basically one user can have more than one location in the database
+    // userLocation.associate = function (models) {
+    //   userLocation.belongsTo(models.User, {
+    //     foreignKey: {
+    //       allowNull: false
+    //     }
+    //   });
+    // };
 
     // Relationship between location and journal, one location can have multiple journals
     userLocation.associate = function(models) {
